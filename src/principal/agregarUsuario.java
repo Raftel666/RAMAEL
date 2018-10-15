@@ -19,7 +19,7 @@ public class agregarUsuario extends JDialogMethods {
 
     public agregarUsuario(Frame owner, boolean modal) {
         super(owner, modal);
-        addWindow(null, 400,420,"", false, this);
+        addWindow(null, 400,420,"Agregar Usuario", false, this);
 
         addLabel(lbNombre, 10,10,100,30, this);
         addLabel(lbApellidoPaterno, 10,70,150,30, this);
@@ -38,4 +38,3 @@ public class agregarUsuario extends JDialogMethods {
         this.setVisible(true);
     }
 }
-
