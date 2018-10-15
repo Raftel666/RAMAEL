@@ -2,6 +2,8 @@ package principal;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 public class agregarPelicula extends JDialogMethods {
     JLabel lbTitulo = new JLabel("Titulo:");
@@ -32,5 +34,25 @@ public class agregarPelicula extends JDialogMethods {
         addTextField(txtGenero, 10, 220, 200, 30, "Genero...", this);
         addTextField(txtTipo, 10, 280, 200, 30, "Tipo...", this);
         this.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }

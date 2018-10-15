@@ -2,8 +2,9 @@ package principal;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
-abstract class JDialogMethods extends JDialog {
+abstract class JDialogMethods extends JDialog implements ActionListener, KeyListener {
 
     public JDialogMethods(Frame owner, boolean modal) {
         super(owner, modal);
@@ -30,7 +31,27 @@ abstract class JDialogMethods extends JDialog {
         TextField.setBounds(x, y, width, height);
         TextField.setUI(new HintTextFieldUI(hint));
         TextField.setBorder(BorderFactory.createLineBorder(Color.black));
-        /**TextField.addKeyListener((KeyListener) dialog);*/
+        TextField.addKeyListener((KeyListener) dialog);
         dialog.add(TextField);
+    }
+
+    public static void addButton(JButton Button, ImageIcon icon, int x, int y, int width, int height, JDialog dialog){
+        Button.setBounds(x, y, width, height);
+        Button.setIcon(icon);
+        Button.setForeground(Color.white);
+        Button.setBackground(Color.gray);
+        Button.addActionListener((ActionListener) dialog);
+        dialog.add(Button);
+    }
+
+    public static void textFieldRed(JTextField TextField){
+        TextField.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
+        TextField.setBackground(Color.pink);
+        TextField.requestFocus();
+    }
+
+    public static void textFieldWhite(JTextField TextField){
+        TextField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        TextField.setBackground(Color.white);
     }
 }

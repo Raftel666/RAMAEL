@@ -2,6 +2,8 @@ package principal;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 public class agregarComic extends JDialogMethods {
     JLabel lbTitulo = new JLabel("Titulo:");
@@ -39,5 +41,25 @@ public class agregarComic extends JDialogMethods {
         addTextField(txtFranquicia, 10, 340, 200, 30, "Franquicia...", this);
         addTextField(txtTipo, 10, 400, 200, 30, "Tipo...", this);
         this.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }

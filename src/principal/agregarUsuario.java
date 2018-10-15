@@ -2,20 +2,23 @@ package principal;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 public class agregarUsuario extends JDialogMethods {
-    JLabel lbNombre = new JLabel("Nombre:");
-    JLabel lbApellidoPaterno = new JLabel("Apellido Paterno:");
-    JLabel lbApellidoMaterno = new JLabel("Apellido Materno:");
-    JLabel lbCorreo = new JLabel("Correo electrónico:");
-    JLabel lbDireccion = new JLabel("Dirección:");
-    JLabel lbTelefono = new JLabel("Telefono:");
-    JTextField txtNombre = new JTextField();
-    JTextField txtApellidoPaterno = new JTextField();
-    JTextField txtApellidoMaterno = new JTextField();
-    JTextField txtCorreo = new JTextField();
-    JTextField txtDireccion = new JTextField();
-    JTextField txtTelefono = new JTextField();
+    private JLabel lbNombre = new JLabel("Nombre:");
+    private JLabel lbApellidoPaterno = new JLabel("Apellido Paterno:");
+    private JLabel lbApellidoMaterno = new JLabel("Apellido Materno:");
+    private JLabel lbCorreo = new JLabel("Correo electrónico:");
+    private JLabel lbDireccion = new JLabel("Dirección:");
+    private JLabel lbTelefono = new JLabel("Telefono:");
+    private JTextField txtNombre = new JTextField();
+    private JTextField txtApellidoPaterno = new JTextField();
+    private JTextField txtApellidoMaterno = new JTextField();
+    private JTextField txtCorreo = new JTextField();
+    private JTextField txtDireccion = new JTextField();
+    private JTextField txtTelefono = new JTextField();
+    private JButton btnGuardar = new JButton("Guardar");
 
     public agregarUsuario(Frame owner, boolean modal) {
         super(owner, modal);
@@ -34,7 +37,40 @@ public class agregarUsuario extends JDialogMethods {
         addTextField(txtCorreo, 10, 220, 200, 30, "Correo", this);
         addTextField(txtDireccion, 10, 280, 200, 30, "Dirección", this);
         addTextField(txtTelefono, 10, 340, 200, 30, "Telefono", this);
+        addButton(btnGuardar, null, 250, 40, 120, 30, this);
 
         this.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnGuardar){
+            if (txtNombre.getText().isEmpty()){
+                textFieldRed(txtNombre);
+            }
+            if (txtApellidoPaterno.getText().isEmpty()){
+                textFieldRed(txtApellidoPaterno);
+            }
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (!txtNombre.getText().isEmpty()){
+            textFieldWhite(txtNombre);
+        }
+        if (!txtApellidoPaterno.getText().isEmpty()){
+            textFieldWhite(txtApellidoPaterno);
+        }
     }
 }
