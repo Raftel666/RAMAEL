@@ -20,6 +20,7 @@ public class agregarComic extends JDialogMethods {
     JTextField txtGenero = new JTextField();
     JTextField txtFranquicia = new JTextField();
     JTextField txtTipo = new JTextField();
+    //YOlo Manolo
 
     public agregarComic(Frame owner, boolean modal) {
         super(owner, modal);
