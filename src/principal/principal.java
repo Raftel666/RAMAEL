@@ -7,7 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class principal extends JFrameMethods {
-    ImageIcon ImFondo = new ImageIcon(getClass().getResource("/imagenes/fondoLibro.jpg"));
+    ImageIcon ImFondo = new ImageIcon(getClass().getResource("/imagenes/bg.jpg"));
+    ImageIcon IconWin = new ImageIcon(getClass().getResource("/imagenes/book.png"));
     PanelImagen ImagenFondo = new PanelImagen(ImFondo);
     private JMenuBar BarraDeMenu = new JMenuBar();
 
@@ -45,7 +46,7 @@ public class principal extends JFrameMethods {
 
 
     public principal() {
-        addWindowProperty(null, ImagenFondo, 800, 600, "Principal", false, this);
+        addWindowProperty(IconWin, ImagenFondo, 800, 600, "Principal", false, this);
         //Agregar Menu
        addMenuBar(BarraDeMenu, Color.darkGray, Color.BLACK, this);
 
