@@ -3,9 +3,10 @@ package principal;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-public class agregarUsuario extends JDialogMethods {
+public class agregarUsuario extends JDialogMethods implements ActionListener {
     private JLabel lbNombre = new JLabel("Nombre:");
     private JLabel lbApellidoPaterno = new JLabel("Apellido Paterno:");
     private JLabel lbApellidoMaterno = new JLabel("Apellido Materno:");
@@ -19,6 +20,10 @@ public class agregarUsuario extends JDialogMethods {
     private JTextField txtDireccion = new JTextField();
     private JTextField txtTelefono = new JTextField();
     private JButton btnGuardar = new JButton("Guardar");
+    private JButton btnSalir = new JButton("Salir");
+
+
+
 
     public agregarUsuario(Frame owner, boolean modal) {
         super(owner, modal);
@@ -38,9 +43,12 @@ public class agregarUsuario extends JDialogMethods {
         addTextField(txtDireccion, 10, 280, 200, 30, "Dirección", this);
         addTextField(txtTelefono, 10, 340, 200, 30, "Telefono", this);
         addButton(btnGuardar, null, 250, 40, 120, 30, this);
+        addButton(btnSalir, null, 250, 100, 120, 30, this);
 
         this.setVisible(true);
+
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -51,6 +59,9 @@ public class agregarUsuario extends JDialogMethods {
             if (txtApellidoPaterno.getText().isEmpty()){
                 textFieldRed(txtApellidoPaterno);
             }
+        }
+        if(e.getSource()==btnSalir){
+            this.dispose();
         }
     }
 
