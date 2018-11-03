@@ -29,7 +29,7 @@ abstract class JFrameMethods extends JFrame implements ActionListener, MouseList
      * @param Resizable
      * @param frame
      */
-    public static void addWindowProperty(ImageIcon icon, int width, int height, String Title, boolean Resizable, JFrame frame){
+    public static void addWindowProperty(ImageIcon icon, PanelImagen panelImagen, int width, int height, String Title, boolean Resizable, JFrame frame){
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(width, height);
         frame.setTitle(Title);
@@ -37,7 +37,8 @@ abstract class JFrameMethods extends JFrame implements ActionListener, MouseList
         frame.setResizable(Resizable);
         frame.setLayout(null);
         frame.getContentPane().setBackground(new Color(87,87,87));
-        if (!(icon == null))
+        frame.setContentPane(panelImagen);
+        if (icon != null)
             frame.setIconImage(icon.getImage());
         frame.setVisible(true);
     }

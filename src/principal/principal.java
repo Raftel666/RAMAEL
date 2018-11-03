@@ -8,7 +8,7 @@ import java.awt.event.MouseEvent;
 
 public class principal extends JFrameMethods {
     ImageIcon ImFondo = new ImageIcon(getClass().getResource("/imagenes/fondoLibro.jpg"));
-    PanelImagen PanelI = new PanelImagen(ImFondo);
+    PanelImagen ImagenFondo = new PanelImagen(ImFondo);
     private JMenuBar BarraDeMenu = new JMenuBar();
 
     private JMenu MenuUsuario = new JMenu("Usuario");
@@ -45,7 +45,7 @@ public class principal extends JFrameMethods {
 
 
     public principal() {
-        addWindowProperty(null, 800, 600, "Principal", false, this);
+        addWindowProperty(null, ImagenFondo, 800, 600, "Principal", false, this);
         //Agregar Menu
        addMenuBar(BarraDeMenu, Color.darkGray, Color.BLACK, this);
 
@@ -77,23 +77,21 @@ public class principal extends JFrameMethods {
         addMenuItem(MenuComics, MenuComicsConsultar, null, this);
         addMenuItem(MenuComics, MenuComicsModificar, null, this);
         addMenuItem(MenuComics, MenuComicsEliminar, null, this);
-        this.add(PanelI);
-
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == MenuUsuarioAgregar) {
-            agregarUsuario agregar = new agregarUsuario(this, true);
+            agregarUsuario add = new agregarUsuario(this, true);
         } else if (e.getSource() == MenuPersonalAgregar) {
-            agregarPersonal agregar = new agregarPersonal(this, true);
+            agregarPersonal add = new agregarPersonal(this, true);
         } else if (e.getSource() == MenuPeliculaAgregar) {
-            agregarPelicula agregar = new agregarPelicula(this, true);
+            agregarPelicula add = new agregarPelicula(this, true);
         } else if (e.getSource() == MenuLibrosAgregar) {
-            agregarLibro agregar = new agregarLibro(this, true);
+            agregarLibro add = new agregarLibro(this, true);
         } else if (e.getSource() == MenuComicsAgregar) {
-            agregarComic agregar = new agregarComic(this, true);
+            agregarComic add = new agregarComic(this, true);
         }
     }
         @Override
