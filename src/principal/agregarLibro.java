@@ -18,6 +18,8 @@ public class agregarLibro extends JDialogMethods {
     JTextField txtPaginas = new JTextField();
     JTextField txtGenero = new JTextField();
     JTextField txtTipo = new JTextField();
+    JButton btnGuardar = new JButton("Guardar");
+    JButton btnSalir = new JButton("Salir");
 
     public agregarLibro(Frame owner, boolean modal) {
         super(owner, modal);
@@ -29,6 +31,8 @@ public class agregarLibro extends JDialogMethods {
         addLabel(lbPaginas, 10, 190, 150, 30, this);
         addLabel(lbGenero, 10, 250, 150, 30, this);
         addLabel(lbTipo, 10, 310, 150, 30, this);
+        addButton(btnGuardar, null, 250, 40, 120, 30, this);
+        addButton(btnSalir, null, 250, 100, 120, 30, this);
 
         addTextField(txtTitulo, 10, 40, 200,30, "Titulo...", this);
         addTextField(txtAutor, 10, 100, 200, 30, "Autor...", this);
@@ -36,12 +40,16 @@ public class agregarLibro extends JDialogMethods {
         addTextField(txtPaginas, 10, 220, 200, 30, "Paginas...", this);
         addTextField(txtGenero, 10, 280, 200, 30, "Genero...", this);
         addTextField(txtTipo, 10, 340, 200, 30, "Tipo...", this);
+
         this.setVisible(true);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==btnSalir){
+            this.dispose();
+        }
 
     }
 
