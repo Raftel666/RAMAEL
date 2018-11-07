@@ -11,12 +11,12 @@ public class agregarPelicula extends JDialogMethods {
     JLabel lbDuracion = new JLabel("Duración:");
     JLabel lbGenero = new JLabel("Genero:");
     JLabel lbTipo = new JLabel("Tipo:");
-
     JTextField txtTitulo = new JTextField();
     JTextField txtProductor = new JTextField();
     JTextField txtDuracion = new JTextField();
     JTextField txtGenero = new JTextField();
     JTextField txtTipo = new JTextField();
+
     private JButton btnGuardar = new JButton("Guardar");
     private JButton btnSalir = new JButton("Salir");
 
@@ -42,6 +42,23 @@ public class agregarPelicula extends JDialogMethods {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnGuardar) {
+            if (txtTitulo.getText().isEmpty()){
+                textFieldRed(txtTitulo);
+            }
+            if (txtProductor.getText().isEmpty()){
+                textFieldRed(txtProductor);
+            }
+            if (txtDuracion.getText().isEmpty()){
+                textFieldRed(txtDuracion);
+            }
+            if (txtGenero.getText().isEmpty()){
+                textFieldRed(txtGenero);
+            }
+            if (txtTipo.getText().isEmpty()){
+                textFieldRed(txtTipo);
+            }
+        }
         if(e.getSource()==btnSalir){
             this.dispose();
         }
@@ -60,6 +77,20 @@ public class agregarPelicula extends JDialogMethods {
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        if (!txtTitulo.getText().isEmpty()){
+            textFieldWhite(txtTitulo);
+        }
+        if (!txtProductor.getText().isEmpty()){
+            textFieldWhite(txtProductor);
+        }
+        if (!txtDuracion.getText().isEmpty()){
+            textFieldWhite(txtDuracion);
+        }
+        if (!txtGenero.getText().isEmpty()){
+            textFieldWhite(txtGenero);
+        }
+        if (!txtTipo.getText().isEmpty()){
+            textFieldWhite(txtTipo);
+        }
     }
 }

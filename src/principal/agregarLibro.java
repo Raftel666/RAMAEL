@@ -47,10 +47,17 @@ public class agregarLibro extends JDialogMethods {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnGuardar){
+            if (txtTitulo.getText().isEmpty()) textFieldRed(txtTitulo);
+            if (txtAutor.getText().isEmpty()) textFieldRed(txtAutor);
+            if (txtEditorial.getText().isEmpty()) textFieldRed(txtEditorial);
+            if (txtPaginas.getText().isEmpty()) textFieldRed(txtPaginas);
+            if (txtGenero.getText().isEmpty()) textFieldRed(txtGenero);
+            if (txtTipo.getText().isEmpty()) textFieldRed(txtTipo);
+            }
         if(e.getSource()==btnSalir){
             this.dispose();
         }
-
     }
 
     @Override
@@ -65,6 +72,23 @@ public class agregarLibro extends JDialogMethods {
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        if (!txtTitulo.getText().isEmpty()){
+            textFieldWhite(txtTitulo);
+        }
+        if (!txtAutor.getText().isEmpty()){
+            textFieldWhite(txtAutor);
+        }
+        if (!txtEditorial.getText().isEmpty()){
+            textFieldWhite(txtEditorial);
+        }
+        if (!txtPaginas.getText().isEmpty()){
+            textFieldWhite(txtPaginas);
+        }
+        if (!txtGenero.getText().isEmpty()){
+            textFieldWhite(txtGenero);
+        }
+        if (!txtTipo.getText().isEmpty()){
+            textFieldWhite(txtTipo);
+        }
     }
 }

@@ -59,6 +59,18 @@ public class agregarUsuario extends JDialogMethods implements ActionListener {
             if (txtApellidoPaterno.getText().isEmpty()){
                 textFieldRed(txtApellidoPaterno);
             }
+            if (txtApellidoMaterno.getText().isEmpty()){
+                textFieldRed(txtApellidoMaterno);
+            }
+            if (txtCorreo.getText().isEmpty()){
+                textFieldRed(txtCorreo);
+            }
+            if (txtDireccion.getText().isEmpty()){
+                textFieldRed(txtDireccion);
+            }
+            if (txtTelefono.getText().isEmpty()){
+                textFieldRed(txtTelefono);
+            }
         }
         if(e.getSource()==btnSalir){
             this.dispose();
@@ -82,6 +94,18 @@ public class agregarUsuario extends JDialogMethods implements ActionListener {
         }
         if (!txtApellidoPaterno.getText().isEmpty()){
             textFieldWhite(txtApellidoPaterno);
+        }
+        if (!txtApellidoMaterno.getText().isEmpty()){
+            textFieldWhite(txtApellidoMaterno);
+        }
+        if (!txtCorreo.getText().isEmpty()){
+            textFieldWhite(txtCorreo);
+        }
+        if (!txtDireccion.getText().isEmpty()){
+            textFieldWhite(txtDireccion);
+        }
+        if (!txtTelefono.getText().isEmpty()){
+            textFieldWhite(txtTelefono);
         }
     }
 }

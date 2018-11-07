@@ -50,10 +50,18 @@ public class agregarComic extends JDialogMethods {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnGuardar){
+            if (txtTitulo.getText().isEmpty()) textFieldRed(txtTitulo);
+            if (txtFecha.getText().isEmpty()) textFieldRed(txtFecha);
+            if (txtAutor.getText().isEmpty()) textFieldRed(txtAutor);
+            if (txtEditorial.getText().isEmpty()) textFieldRed(txtEditorial);
+            if (txtGenero.getText().isEmpty()) textFieldRed(txtGenero);
+            if (txtFranquicia.getText().isEmpty()) textFieldRed(txtFranquicia);
+            if (txtTipo.getText().isEmpty()) textFieldRed(txtTipo);
+            }
         if(e.getSource()==btnSalir){
             this.dispose();
         }
-
     }
 
     @Override
@@ -68,6 +76,26 @@ public class agregarComic extends JDialogMethods {
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        if (!txtTitulo.getText().isEmpty()){
+            textFieldWhite(txtTitulo);
+        }
+        if (!txtFecha.getText().isEmpty()){
+            textFieldWhite(txtFecha);
+        }
+        if (!txtAutor.getText().isEmpty()){
+            textFieldWhite(txtAutor);
+        }
+        if (!txtEditorial.getText().isEmpty()){
+            textFieldWhite(txtEditorial);
+        }
+        if (!txtGenero.getText().isEmpty()){
+            textFieldWhite(txtGenero);
+        }
+        if (!txtFranquicia.getText().isEmpty()){
+            textFieldWhite(txtFranquicia);
+        }
+        if (!txtTipo.getText().isEmpty()){
+            textFieldWhite(txtTipo);
+        }
     }
 }

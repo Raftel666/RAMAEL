@@ -49,10 +49,32 @@ public class agregarPersonal extends JDialogMethods {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==btnSalir){
+        if (e.getSource() == btnGuardar) {
+            if (txtNombre.getText().isEmpty()){
+                textFieldRed(txtNombre);
+            }
+            if (txtApellidoPaterno.getText().isEmpty()){
+                textFieldRed(txtApellidoPaterno);
+            }
+            if (txtApellidoMaterno.getText().isEmpty()){
+                textFieldRed(txtApellidoMaterno);
+            }
+            if (txtCorreo.getText().isEmpty()){
+                textFieldRed(txtCorreo);
+            }
+            if (txtDireccion.getText().isEmpty()){
+                textFieldRed(txtDireccion);
+            }
+            if (txtTelefono.getText().isEmpty()){
+                textFieldRed(txtTelefono);
+            }
+            if (txtPuesto.getText().isEmpty()){
+                textFieldRed(txtPuesto);
+            }
+        }
+        if (e.getSource() == btnSalir){
             this.dispose();
         }
-
     }
 
     @Override
@@ -67,6 +89,26 @@ public class agregarPersonal extends JDialogMethods {
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        if (!txtNombre.getText().isEmpty()){
+            textFieldWhite(txtNombre);
+        }
+        if (!txtApellidoPaterno.getText().isEmpty()){
+            textFieldWhite(txtApellidoPaterno);
+        }
+        if (!txtApellidoMaterno.getText().isEmpty()){
+            textFieldWhite(txtApellidoMaterno);
+        }
+        if (!txtCorreo.getText().isEmpty()){
+            textFieldWhite(txtCorreo);
+        }
+        if (!txtDireccion.getText().isEmpty()){
+            textFieldWhite(txtDireccion);
+        }
+        if (!txtTelefono.getText().isEmpty()){
+            textFieldWhite(txtTelefono);
+        }
+        if (!txtPuesto.getText().isEmpty()){
+            textFieldWhite(txtPuesto);
+        }
     }
 }
