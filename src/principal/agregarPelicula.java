@@ -17,6 +17,8 @@ public class agregarPelicula extends JDialogMethods {
     JTextField txtDuracion = new JTextField();
     JTextField txtGenero = new JTextField();
     JTextField txtTipo = new JTextField();
+    private JButton btnGuardar = new JButton("Guardar");
+    private JButton btnSalir = new JButton("Salir");
 
     public agregarPelicula(Frame owner, boolean modal) {
         super(owner, modal);
@@ -27,6 +29,8 @@ public class agregarPelicula extends JDialogMethods {
         addLabel(lbDuracion, 10, 130, 150, 30, this);
         addLabel(lbGenero, 10, 190, 150, 30, this);
         addLabel(lbTipo, 10, 250, 150, 30, this);
+        addButton(btnGuardar, null, 250, 40, 120, 30, this);
+        addButton(btnSalir, null, 250, 100, 120, 30, this);
 
         addTextField(txtTitulo, 10, 40, 200,30, "Titulo...", this);
         addTextField(txtProductor, 10, 100, 200, 30, "Productor...", this);
@@ -38,6 +42,9 @@ public class agregarPelicula extends JDialogMethods {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==btnSalir){
+            this.dispose();
+        }
 
     }
 

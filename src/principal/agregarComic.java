@@ -20,6 +20,8 @@ public class agregarComic extends JDialogMethods {
     JTextField txtGenero = new JTextField();
     JTextField txtFranquicia = new JTextField();
     JTextField txtTipo = new JTextField();
+    JButton btnGuardar = new JButton("Guardar");
+    JButton btnSalir = new JButton("Salir");
     //YOlo Manolo
 
     public agregarComic(Frame owner, boolean modal) {
@@ -33,6 +35,8 @@ public class agregarComic extends JDialogMethods {
         addLabel(lbGenero, 10, 250, 150, 30, this);
         addLabel(lbFranquicia, 10, 310, 150, 30, this);
         addLabel(lbTipo, 10, 370, 150, 30, this);
+        addButton(btnGuardar, null, 250, 40, 120, 30, this);
+        addButton(btnSalir, null, 250, 100, 120, 30, this);
 
         addTextField(txtTitulo, 10, 40, 200,30, "Titulo...", this);
         addTextField(txtFecha, 10, 100, 200, 30, "Fecha...", this);
@@ -46,6 +50,9 @@ public class agregarComic extends JDialogMethods {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==btnSalir){
+            this.dispose();
+        }
 
     }
 

@@ -20,6 +20,8 @@ public class agregarPersonal extends JDialogMethods {
     JTextField txtDireccion = new JTextField();
     JTextField txtTelefono = new JTextField();
     JTextField txtPuesto = new JTextField();
+    JButton btnGuardar = new JButton("Guardar");
+    JButton btnSalir = new JButton("Salir");
 
     public agregarPersonal(Frame owner, boolean modal) {
         super(owner, modal);
@@ -32,6 +34,8 @@ public class agregarPersonal extends JDialogMethods {
         addLabel(lbDireccion, 10, 250, 150, 30, this);
         addLabel(lbTelefono, 10, 310, 150, 30, this);
         addLabel(lbPuesto, 10, 370, 150, 30, this);
+        addButton(btnGuardar, null, 250, 40, 120, 30, this);
+        addButton(btnSalir, null, 250, 100, 120, 30, this);
 
         addTextField(txtNombre, 10, 40, 200,30, "Nombre...", this);
         addTextField(txtApellidoPaterno, 10, 100, 200, 30, "Apellido paterno...", this);
@@ -45,6 +49,9 @@ public class agregarPersonal extends JDialogMethods {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==btnSalir){
+            this.dispose();
+        }
 
     }
 
