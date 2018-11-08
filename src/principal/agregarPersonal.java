@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 public class agregarPersonal extends JDialogMethods {
+    JLabel lbId = new JLabel("Id:");
     JLabel lbNombre = new JLabel("Nombre:");
     JLabel lbApellidoPaterno = new JLabel("Apellido Paterno:");
     JLabel lbApellidoMaterno = new JLabel("Apellido Materno:");
@@ -13,6 +14,7 @@ public class agregarPersonal extends JDialogMethods {
     JLabel lbDireccion = new JLabel("Dirección:");
     JLabel lbTelefono = new JLabel("Telefono:");
     JLabel lbPuesto = new JLabel("Puesto:");
+    JTextField txtId = new JTextField();
     JTextField txtNombre = new JTextField();
     JTextField txtApellidoPaterno = new JTextField();
     JTextField txtApellidoMaterno = new JTextField();
@@ -22,28 +24,36 @@ public class agregarPersonal extends JDialogMethods {
     JTextField txtPuesto = new JTextField();
     JButton btnGuardar = new JButton("Guardar");
     JButton btnSalir = new JButton("Salir");
+    JButton btnModificar = new JButton("Modificar");
+    JButton btnConsultar = new JButton("Consultar");
+    JButton btnEliminar = new JButton("Eliminar");
 
     public agregarPersonal(Frame owner, boolean modal) {
         super(owner, modal);
-        addWindow(null, 400,480,"Agregar personal", false, this);
+        addWindow(null, 400,530,"Agregar personal", false, this);
 
-        addLabel(lbNombre, 10,10,100,30, this);
-        addLabel(lbApellidoPaterno, 10,70,150,30, this);
-        addLabel(lbApellidoMaterno, 10, 130, 150, 30, this);
-        addLabel(lbCorreo, 10, 190, 150, 30, this);
-        addLabel(lbDireccion, 10, 250, 150, 30, this);
-        addLabel(lbTelefono, 10, 310, 150, 30, this);
-        addLabel(lbPuesto, 10, 370, 150, 30, this);
+        addLabel(lbId, 10,10,100,30, this);
+        addLabel(lbNombre, 10,70,100,30, this);
+        addLabel(lbApellidoPaterno, 10,130,150,30, this);
+        addLabel(lbApellidoMaterno, 10, 190, 150, 30, this);
+        addLabel(lbCorreo, 10, 250, 150, 30, this);
+        addLabel(lbDireccion, 10, 310, 150, 30, this);
+        addLabel(lbTelefono, 10, 370, 150, 30, this);
+        addLabel(lbPuesto, 10, 430, 150, 30, this);
         addButton(btnGuardar, null, 250, 40, 120, 30, this);
-        addButton(btnSalir, null, 250, 100, 120, 30, this);
+        addButton(btnModificar, null, 250, 100, 120, 30, this);
+        addButton(btnConsultar, null, 250, 160, 120, 30, this);
+        addButton(btnEliminar, null, 250, 220, 120, 30, this);
+        addButton(btnSalir, null, 250, 280, 120, 30, this);
 
-        addTextField(txtNombre, 10, 40, 200,30, "Nombre...", this);
-        addTextField(txtApellidoPaterno, 10, 100, 200, 30, "Apellido paterno...", this);
-        addTextField(txtApellidoMaterno, 10, 160, 200, 30, "Apellido materno...", this);
-        addTextField(txtCorreo, 10, 220, 200, 30, "Correo...", this);
-        addTextField(txtDireccion, 10, 280, 200, 30, "Dirección...", this);
-        addTextField(txtTelefono, 10, 340, 200, 30, "Telefono...", this);
-        addTextField(txtPuesto, 10, 400, 200, 30, "Puesto...", this);
+        addTextField(txtId, 10, 40, 200,30, "Id...", this);
+        addTextField(txtNombre, 10, 100, 200,30, "Nombre...", this);
+        addTextField(txtApellidoPaterno, 10, 160, 200, 30, "Apellido paterno...", this);
+        addTextField(txtApellidoMaterno, 10, 220, 200, 30, "Apellido materno...", this);
+        addTextField(txtCorreo, 10, 280, 200, 30, "Correo...", this);
+        addTextField(txtDireccion, 10, 340, 200, 30, "Dirección...", this);
+        addTextField(txtTelefono, 10, 400, 200, 30, "Telefono...", this);
+        addTextField(txtPuesto, 10, 460, 200, 30, "Puesto...", this);
         this.setVisible(true);
     }
 
