@@ -44,7 +44,7 @@ abstract class JFrameMethods extends JFrame implements ActionListener, MouseList
     }
 
     /**
-     * Metodo para agragar TextField´s al Frame de la ventana.
+     * Metodo para agregar TextField´s al Frame de la ventana.
      * @param TextField
      * @param x
      * @param y
@@ -62,7 +62,7 @@ abstract class JFrameMethods extends JFrame implements ActionListener, MouseList
     }
 
     /**
-     *
+     * Metodo para agregar PasswordField´s al Frame de la ventana.
      * @param PasswordField
      * @param x
      * @param y
@@ -79,7 +79,7 @@ abstract class JFrameMethods extends JFrame implements ActionListener, MouseList
     }
 
     /**
-     * Metodo para agregar JLabel´s al frame de la ventana.
+     * Metodo para agregar JLabel´s al Frame de la ventana.
      * @param Label
      * @param x
      * @param y
@@ -198,6 +198,7 @@ abstract class JFrameMethods extends JFrame implements ActionListener, MouseList
     }
 
     /**
+     * Metodo para agregar RadioButton´s al Frame de la ventana.
      * @param radio
      * @param x
      * @param y
@@ -213,7 +214,7 @@ abstract class JFrameMethods extends JFrame implements ActionListener, MouseList
         frame.add(radio);
     }
     /**
-     *
+     *Metodo para agregar ComboBox´s al Frame de la ventana.
      * @param comboBox
      * @param x
      * @param y
@@ -239,7 +240,7 @@ abstract class JFrameMethods extends JFrame implements ActionListener, MouseList
     }
 
     /**
-     *
+     * Metodo para Validar los TextField.
      * @param TextField Es el unico parametro que se pide para que se vuelva rojo si estan vacio
      */
     public static void validateTextFieldRED(JTextField TextField){
@@ -256,7 +257,7 @@ abstract class JFrameMethods extends JFrame implements ActionListener, MouseList
         TextField.setBackground(Color.white);
     }
     /**
-     *
+     *Metodo para agregar Table´s al Frame de la ventana.
      * @param SP
      * @param Table
      * @param x
@@ -275,7 +276,7 @@ abstract class JFrameMethods extends JFrame implements ActionListener, MouseList
     }
 
     /**
-     *
+     *Metodo para agregar ImageLabel´s al Frame de la ventana.
      * @param Label
      * @param x
      * @param y

@@ -6,11 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-public class consultarUsuario extends JDialogMethods implements ActionListener {
+public class ConsultarUsuario extends JDialogMethods implements ActionListener {
     private JButton btnConsultar = new JButton("Consultar");
     private JButton btnSalir = new JButton("Salir");
 
-    public consultarUsuario(Frame owner, boolean modal) {
+    public ConsultarUsuario(Frame owner, boolean modal) {
         super(owner, modal);
         addWindow(null, 800,620,"Consultar Usuario", false, this);
         addButton(btnConsultar, null, 250, 40, 120, 30, this);

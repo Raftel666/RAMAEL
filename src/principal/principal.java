@@ -67,7 +67,7 @@ public class principal extends JFrameMethods {
         if (e.getSource() == MenuUsuarioAgregar) {
             agregarUsuario add = new agregarUsuario(this, true);
         } else if (e.getSource() == MenuUsuarioConsultar) {
-            consultarUsuario add = new consultarUsuario(this, true);
+            ConsultarUsuario add = new ConsultarUsuario(this, true);
         } else if (e.getSource() == MenuPersonalAgregar) {
             agregarPersonal add = new agregarPersonal(this, true);
         } else if (e.getSource() == MenuPeliculaAgregar) {
