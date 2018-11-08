@@ -1,7 +1,8 @@
 package principal;
 
 public class App {
-    public static void main(String[] args) {
-        principal Principal = new principal();
+    public static void main(String[] args) throws  InterruptedException {
+        Splash Ventana = new Splash();
+
     }
 }
