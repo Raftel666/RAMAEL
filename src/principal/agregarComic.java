@@ -22,7 +22,6 @@ public class agregarComic extends JDialogMethods {
     JTextField txtTipo = new JTextField();
     JButton btnGuardar = new JButton("Guardar");
     JButton btnSalir = new JButton("Salir");
-    //YOlo Manolo
 
     public agregarComic(Frame owner, boolean modal) {
         super(owner, modal);
