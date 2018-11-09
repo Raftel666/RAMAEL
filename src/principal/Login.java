@@ -1,6 +1,5 @@
 package principal;
 
-import com.sun.org.apache.xpath.internal.operations.String;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -9,8 +8,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.security.*;
-import java.sql.*;
 
 public class Login extends JFrameMethods implements ActionListener, MouseListener {
     ImageIcon imgIcon = new ImageIcon(getClass().getResource("/imagenes/Book2.png"));
@@ -52,12 +49,12 @@ public class Login extends JFrameMethods implements ActionListener, MouseListene
 
     private void buscarUsuario() {
         try {
-            //String CadenaEncryptada = encryptar(new String(txtPassWord.getPassword()));
+            String CadenaEncryptada = encryptar(new String(txtPassWord.getPassword()));
             PreparedStatement StmBuscar;
             java.lang.String SQL = "select * from usuarios where usuario = ? and password = ?";
             StmBuscar = Conex.MiConexion.getConexion().prepareCall(SQL);
             StmBuscar.setString(1, txtUsuario.getText());
-           // StmBuscar.setString(2, CadenaEncryptada);
+            StmBuscar.setString(2, CadenaEncryptada);
             ResultSet RsBuscar = StmBuscar.executeQuery();
             if (RsBuscar.next()){
                 JOptionPane.showMessageDialog(rootPane,"Bienvenido "+RsBuscar.getObject("nombre"));
@@ -71,6 +68,12 @@ public class Login extends JFrameMethods implements ActionListener, MouseListene
         } catch (Exception e){
             JOptionPane.showMessageDialog(rootPane, "Error: "+e);
         }
+    }
+
+    private static String encryptar(String Password) throws NoSuchAlgorithmException {
+        MessageDigest Md = MessageDigest.getInstance("Md5");
+        Md.update(Password.getBytes(),0,Password.length());
+        return new BigInteger(1,Md.digest()).toString(16);
     }
 
     @Override
@@ -111,15 +114,7 @@ public class Login extends JFrameMethods implements ActionListener, MouseListene
         }
     }
 
-    /**
-    private String encryptar(String password) throws NoSuchAlgorithmException{
 
-       MessageDigest Md = MessageDigest.getInstance("MD5");
-        Md.update(password.getBytes(), 0, password.length());
-        return new BigInteger(1, Md.digest().toString());
-         
-    }
-     */
 
     private void limpiarCampos() {
         txtUsuario.setText("");
