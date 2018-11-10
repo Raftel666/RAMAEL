@@ -1,5 +1,7 @@
 package principal;
 
+import javafx.scene.control.PasswordField;
+
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
@@ -94,6 +96,13 @@ abstract class JFrameMethods extends JFrame implements ActionListener, MouseList
         Label.setForeground(Color.black);
         Label.addMouseListener((MouseListener) frame);
         frame.add(Label);
+    }
+
+
+    public static void addTypeLabel(JLabel label, Color color, int x, int y, int width, int height, JFrame frame){
+        label.setBounds(x, y, width, height);
+        label.setForeground(color);
+        frame.add(label);
     }
 
     /**
@@ -249,11 +258,21 @@ abstract class JFrameMethods extends JFrame implements ActionListener, MouseList
             TextField.setBackground(Color.pink);
             TextField.requestFocus();
     }
+    public static void validatePassWordFieldRED(JPasswordField passwordField){
+            passwordField.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
+            passwordField.setBackground(Color.pink);
+            passwordField.requestFocus();
+    }
     /**
      *
      * @param TextField
      */
+
     public static void validateTextFieldWhite(JTextField TextField){
+        TextField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        TextField.setBackground(Color.white);
+    }
+    public static void validatePassWordFieldWhite(JPasswordField TextField){
         TextField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         TextField.setBackground(Color.white);
     }
