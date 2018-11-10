@@ -76,7 +76,7 @@ public class Splash extends JFrame implements MouseListener, MouseMotionListener
             JOptionPane.showMessageDialog(rootPane, "Error:"+ex);
         }finally {
             this.dispose();
-            principal Inicio = new principal();
+            Login2 l = new Login2();
         }
     }
 
