@@ -37,8 +37,9 @@ abstract class JFrameMethods extends JFrame implements ActionListener, MouseList
         frame.setResizable(Resizable);
         frame.setLayout(null);
         frame.getContentPane().setBackground(new Color(87,87,87));
-        frame.setContentPane(panelImagen);
-        if (icon != null)
+        if (panelImagen != null)
+            frame.setContentPane(panelImagen);
+        if (!(icon == null))
             frame.setIconImage(icon.getImage());
         frame.setVisible(true);
     }

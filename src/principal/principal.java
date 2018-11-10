@@ -36,7 +36,7 @@ public class principal extends JFrameMethods {
 
 
     public principal() {
-        addWindowProperty(IconWin, ImagenFondo, 800, 600, "Principal", false, this);
+        addWindowProperty(IconWin, ImagenFondo, 1000, 600, "Principal", false, this);
         //Agregar Menu
         addMenuBar(BarraDeMenu, Color.darkGray, Color.BLACK, this);
 

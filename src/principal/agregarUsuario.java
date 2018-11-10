@@ -33,7 +33,7 @@ public class agregarUsuario extends JDialogMethods implements ActionListener {
 
     public agregarUsuario(Frame owner, boolean modal) {
         super(owner, modal);
-        addWindow(null, 400,480,"Agregar Usuario", false, this);
+        addWindow(null, 400,600,"Agregar Usuario", false, this);
 
         addLabel(lbId, 10,10,100,30, this);
         addLabel(lbNombre, 10,70,100,30, this);
