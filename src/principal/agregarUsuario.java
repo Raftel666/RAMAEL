@@ -1,10 +1,16 @@
 package principal;
 
+import jdk.nashorn.internal.scripts.JO;
+
+import javax.naming.spi.DirStateFactory;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class agregarUsuario extends JDialogMethods implements ActionListener {
     private JLabel lbId = new JLabel("Id:");
@@ -64,30 +70,97 @@ public class agregarUsuario extends JDialogMethods implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == btnGuardar){
-            if (txtNombre.getText().isEmpty()){
+        if (e.getSource() == btnGuardar) {
+            if (txtNombre.getText().isEmpty()) {
                 textFieldRed(txtNombre);
             }
-            if (txtApellidoPaterno.getText().isEmpty()){
+            if (txtApellidoPaterno.getText().isEmpty()) {
                 textFieldRed(txtApellidoPaterno);
             }
-            if (txtApellidoMaterno.getText().isEmpty()){
+            if (txtApellidoMaterno.getText().isEmpty()) {
                 textFieldRed(txtApellidoMaterno);
             }
-            if (txtCorreo.getText().isEmpty()){
+            if (txtCorreo.getText().isEmpty()) {
                 textFieldRed(txtCorreo);
             }
-            if (txtDireccion.getText().isEmpty()){
+            if (txtDireccion.getText().isEmpty()) {
                 textFieldRed(txtDireccion);
             }
-            if (txtTelefono.getText().isEmpty()){
+            if (txtTelefono.getText().isEmpty()) {
                 textFieldRed(txtTelefono);
+            } else {
+                guardar();
+                limpiarCampos();
             }
         }
+        else if(e.getSource()==btnConsultar){
+            if(txtId.getText().isEmpty()){
+                JOptionPane.showMessageDialog(rootPane,"campo id no debe estar vacio");
+            }
+            else{
+                if (buscar(true)==false){
+                    JOptionPane.showMessageDialog(rootPane,"dato no existe");
+                    limpiarCampos();
+                }
+            }
+
+
+        }
+
+
         if(e.getSource()==btnSalir){
             this.dispose();
         }
+
+        }
+
+    private boolean buscar(boolean b ) {
+        try {
+            PreparedStatement buscarStm;
+            String SQL =" select*from productos where codigo = ?";
+            buscarStm= Conex.MiConexion.getConexion().prepareCall(SQL);
+            buscarStm.setInt(1,Integer.parseInt(txtId.getText()));
+            ResultSet RsBuscar = buscarStm.executeQuery();
+
+
+        } catch (SQLException e) {
+
+        }
+
     }
+
+    private void limpiarCampos() {
+        txtId.setText("");
+        txtNombre.setText("");
+        txtApellidoPaterno.setText("");
+        txtApellidoMaterno.setText("");
+        txtDireccion.setText("");
+        txtTelefono.setText("");
+        txtCorreo.setText("");
+        txtId.requestFocus();
+    }
+
+    private void guardar() {
+        try {
+            PreparedStatement StmGuardar;
+            String SQL= "insert into usuarios(idUsuarios,Nombre,ApellidoPaterno,ApellidoMaterno,Direccion,Telefono,Correo)values(?,?,?,?,?,?,?)";
+            StmGuardar = Conex.MiConexion.getConexion().prepareCall(SQL);
+            StmGuardar.setInt(1,Integer.parseInt(txtId.getText()));
+            StmGuardar.setString(2,txtNombre.getText());
+            StmGuardar.setString(3,txtApellidoPaterno.getText());
+            StmGuardar.setString(4,txtApellidoMaterno.getText());
+            StmGuardar.setString(5,txtDireccion.getText());
+            StmGuardar.setInt(6,Integer.parseInt(txtTelefono.getText()));
+            StmGuardar.setString(7,txtCorreo.getText());
+            StmGuardar.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane,"Datos insertados correctamente");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(rootPane,"error"+e);
+        }
+
+    }
+
 
     @Override
     public void keyTyped(KeyEvent e) {
