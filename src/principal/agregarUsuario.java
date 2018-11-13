@@ -127,7 +127,7 @@ public class agregarUsuario extends JDialogMethods implements ActionListener {
 
         }
 
-      }
+    }
 
     private void limpiarCampos() {
         txtId.setText("");
