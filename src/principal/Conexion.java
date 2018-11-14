@@ -24,7 +24,7 @@ public class Conexion  {
             Url="jdbc:mysql://"+this.Servidor+"/"+this.Database;
             Conexion=DriverManager.getConnection(this.Url, this.Usuario, this.Password);
             System.out.println("Conexion a Base de Datos "+Url+" . . . . .Ok");
-            JOptionPane.showMessageDialog(null,"si me pude conectar"+Database);
+            JOptionPane.showMessageDialog(null,"Conetado a: "+Database);
         }
         catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"No se pudo conectar, "+ex.toString());

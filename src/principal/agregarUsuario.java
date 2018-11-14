@@ -1,6 +1,7 @@
 package principal;
 
 import jdk.nashorn.internal.scripts.JO;
+import sun.dc.pr.PRError;
 
 import javax.naming.spi.DirStateFactory;
 import javax.swing.*;
@@ -39,19 +40,19 @@ public class agregarUsuario extends JDialogMethods implements ActionListener {
 
     public agregarUsuario(Frame owner, boolean modal) {
         super(owner, modal);
-        addWindow(null, 400,600,"Agregar Usuario", false, this);
+        addWindow(null, 400, 600, "Agregar Usuario", false, this);
 
-        addLabel(lbId, 10,10,100,30, this);
-        addLabel(lbNombre, 10,70,100,30, this);
-        addLabel(lbApellidoPaterno, 10,130,150,30, this);
+        addLabel(lbId, 10, 10, 100, 30, this);
+        addLabel(lbNombre, 10, 70, 100, 30, this);
+        addLabel(lbApellidoPaterno, 10, 130, 150, 30, this);
         addLabel(lbApellidoMaterno, 10, 190, 150, 30, this);
         addLabel(lbCorreo, 10, 250, 150, 30, this);
         addLabel(lbDireccion, 10, 310, 150, 30, this);
         addLabel(lbTelefono, 10, 370, 150, 30, this);
 
 
-        addTextField(txtId, 10, 40, 200,30, "id...", this);
-        addTextField(txtNombre, 10, 100, 200,30, "Nombre...", this);
+        addTextField(txtId, 10, 40, 200, 30, "id...", this);
+        addTextField(txtNombre, 10, 100, 200, 30, "Nombre...", this);
         addTextField(txtApellidoPaterno, 10, 160, 200, 30, "Apellido paterno", this);
         addTextField(txtApellidoMaterno, 10, 220, 200, 30, "Apellido materno", this);
         addTextField(txtCorreo, 10, 280, 200, 30, "Correo", this);
@@ -64,9 +65,7 @@ public class agregarUsuario extends JDialogMethods implements ActionListener {
         addButton(btnSalir, null, 250, 280, 120, 30, this);
 
         this.setVisible(true);
-
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -92,38 +91,119 @@ public class agregarUsuario extends JDialogMethods implements ActionListener {
                 guardar();
                 limpiarCampos();
             }
-        }
-        else if(e.getSource()==btnConsultar){
-            if(txtId.getText().isEmpty()){
-                JOptionPane.showMessageDialog(rootPane,"campo id no debe estar vacio");
-            }
-            else{
-                if (buscar(true)==false){
-                    JOptionPane.showMessageDialog(rootPane,"dato no existe");
+        } else if (e.getSource() == btnConsultar) {
+            if (txtId.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "campo id no debe estar vacio");
+            } else {
+                if (buscar(true) == false) {
+                    JOptionPane.showMessageDialog(rootPane, "dato no existe");
                     limpiarCampos();
                 }
             }
 
 
+        } else if (e.getSource() == btnEliminar) {
+            if (txtId.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "El campo del id no debe de estar vacio ");
+            } else {
+                if (buscar(false) == false) {
+                    JOptionPane.showMessageDialog(rootPane, "Dato no existe");
+                } else {
+                    int opc;
+                    opc = JOptionPane.showConfirmDialog(rootPane, "eliminar producto", "Alerta", 0, 1);
+                    if (opc == 0) {
+                        Eliminar();
+                        limpiarCampos();
+                    }
+                }
+            }
+
+        } else if (e.getSource() == btnModificar) {
+            if (txtId.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "Campo ID no debe de estar vacío");
+            } else {
+                if (buscar(false) == false) {
+                    JOptionPane.showMessageDialog(rootPane, "Dato no existe");
+                    limpiarCampos();
+                } else {
+                    int opc = JOptionPane.showConfirmDialog(rootPane, "Deseas modificarlo?", "Alerta!", 0, 1);
+                    if (opc == 0) {
+                        modificar();
+                        limpiarCampos();
+                    }
+                }
+            }
+
+
         }
-
-
-        if(e.getSource()==btnSalir){
+        if (e.getSource() == btnSalir) {
             this.dispose();
         }
+    }
+
+    private void modificar() {
+        try {
+            PreparedStatement StmModificar;
+            String Sql = "update usuarios set Nombre = ?, ApellidoPaterno = ?, ApellidoMaterno = ?, Direccion = ?, " +
+                    "Telefono = ?, Correo = ? where idUsuarios = ?";
+            StmModificar = Conex.MiConexion.getConexion().prepareCall(Sql);
+            StmModificar.setString(1, txtNombre.getText());
+            StmModificar.setString(2, txtApellidoPaterno.getText());
+            StmModificar.setString(3, txtApellidoMaterno.getText());
+            StmModificar.setString(4, txtDireccion.getText());
+            StmModificar.setString(5, txtTelefono.getText());
+            StmModificar.setString(6, txtCorreo.getText());
+            StmModificar.setInt(7,Integer.parseInt(txtId.getText()));
+
+            StmModificar.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane, "Datos actualizados correctamente");
+
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(rootPane, "Error"+e);
+        }
+    }
+
+    private void Eliminar() {
+        try {
+            PreparedStatement EliminarStm;
+            String SQL = "delete from usuarios where idUsuarios = ?";
+            EliminarStm=Conex.MiConexion.getConexion().prepareCall(SQL);
+            EliminarStm.setInt(1,Integer.parseInt(txtId.getText()));
+            EliminarStm.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane,"Dato eliminado correctamente");
+
+
+
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(rootPane,"error"+e);
 
         }
+    }
 
-    private boolean buscar(boolean b ) {
+    private boolean buscar(boolean  mostrar ) {
         try {
             PreparedStatement buscarStm;
-            String SQL =" select*from productos where codigo = ?";
+            String SQL =" select*from usuarios where idUsuarios = ?";
             buscarStm= Conex.MiConexion.getConexion().prepareCall(SQL);
             buscarStm.setInt(1,Integer.parseInt(txtId.getText()));
             ResultSet RsBuscar = buscarStm.executeQuery();
+            while(RsBuscar.next()){
+                if(mostrar==true){
+                    txtNombre.setText(RsBuscar.getObject("nombre").toString());
+                    txtApellidoPaterno.setText(RsBuscar.getObject("apellidoPaterno").toString());
+                    txtApellidoMaterno.setText(RsBuscar.getObject("apellidoMaterno").toString());
+                    txtDireccion.setText(RsBuscar.getObject("direccion").toString());
+                    txtTelefono.setText(RsBuscar.getObject("telefono").toString());
+                    txtCorreo.setText(RsBuscar.getObject("correo").toString());
+                }
+                return true;
+            }
+            return false;
 
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane,"Error"+ e);
+            return false;
 
         }
 
@@ -143,7 +223,7 @@ public class agregarUsuario extends JDialogMethods implements ActionListener {
     private void guardar() {
         try {
             PreparedStatement StmGuardar;
-            String SQL= "insert into usuarios(idUsuarios,Nombre,ApellidoPaterno,ApellidoMaterno,Direccion,Telefono,Correo)values(?,?,?,?,?,?,?)";
+            String SQL= "insert into usuarios(idUsuarios, Nombre, ApellidoPaterno, ApellidoMaterno, Direccion, Telefono, Correo) values (?, ?, ?, ?, ?, ?, ?)";
             StmGuardar = Conex.MiConexion.getConexion().prepareCall(SQL);
             StmGuardar.setInt(1,Integer.parseInt(txtId.getText()));
             StmGuardar.setString(2,txtNombre.getText());
