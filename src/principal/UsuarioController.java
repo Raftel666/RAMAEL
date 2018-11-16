@@ -192,7 +192,7 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
         }
     }
 
-    private void guardar() {
+    private void guardar() {//guatdar cambios
         try {
             PreparedStatement StmGuardar;
             String SQL= "insert into usuarios(idUsuarios, Nombre, ApellidoPaterno, ApellidoMaterno, Direccion, Telefono, Correo) values (?, ?, ?, ?, ?, ?, ?)";
