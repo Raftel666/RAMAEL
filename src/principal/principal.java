@@ -108,5 +108,6 @@ public class principal extends JFrameMethods {
 
     @Override
     public void mouseExited(MouseEvent e) {
+
     }
 }
