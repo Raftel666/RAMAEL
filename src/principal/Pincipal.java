@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-public class principal extends JFrameMethods {
+public class Pincipal extends JFrameMethods {
     ImageIcon ImFondo = new ImageIcon(getClass().getResource("/imagenes/bg.jpg"));
     ImageIcon IconWin = new ImageIcon(getClass().getResource("/imagenes/book.png"));
     PanelImagen ImagenFondo = new PanelImagen(ImFondo);
@@ -35,7 +35,7 @@ public class principal extends JFrameMethods {
     private JMenuItem MenuComicsConsultar = new JMenuItem("Consultar");
 
 
-    public principal() {
+    public Pincipal() {
         addWindowProperty(IconWin, ImagenFondo, 1000, 600, "Principal", false, this);
         //Agregar Menu
         addMenuBar(BarraDeMenu, Color.darkGray, Color.BLACK, this);
@@ -65,17 +65,17 @@ public class principal extends JFrameMethods {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == MenuUsuarioAgregar) {
-            agregarUsuario add = new agregarUsuario(this, true);
+            UsuarioController add = new UsuarioController(this, true);
         } else if (e.getSource() == MenuUsuarioConsultar) {
             ConsultarUsuario add = new ConsultarUsuario(this, true);
         } else if (e.getSource() == MenuPersonalAgregar) {
-            agregarPersonal add = new agregarPersonal(this, true);
+            PersonalController add = new PersonalController(this, true);
         } else if (e.getSource() == MenuPeliculaAgregar) {
-            agregarPelicula add = new agregarPelicula(this, true);
+            PeliculaController add = new PeliculaController(this, true);
         } else if (e.getSource() == MenuLibrosAgregar) {
-            agregarLibro add = new agregarLibro(this, true);
+            LibroController add = new LibroController(this, true);
         } else if (e.getSource() == MenuComicsAgregar) {
-            agregarComic add = new agregarComic(this, true);
+            ComicController add = new ComicController(this, true);
         }
     }
         @Override

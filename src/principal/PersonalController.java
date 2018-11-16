@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-public class agregarPersonal extends JDialogMethods {
+public class PersonalController extends JDialogMethods {
     JLabel lbId = new JLabel("Id:");
     JLabel lbNombre = new JLabel("Nombre:");
     JLabel lbApellidoPaterno = new JLabel("Apellido Paterno:");
@@ -28,7 +28,7 @@ public class agregarPersonal extends JDialogMethods {
     JButton btnConsultar = new JButton("Consultar");
     JButton btnEliminar = new JButton("Eliminar");
 
-    public agregarPersonal(Frame owner, boolean modal) {
+    public PersonalController(Frame owner, boolean modal) {
         super(owner, modal);
         addWindow(null, 400,530,"Agregar personal", false, this);
 

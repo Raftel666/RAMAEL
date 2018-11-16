@@ -56,7 +56,7 @@ public class Login extends JFrameMethods {
             if (RsBuscar.next()){
                 JOptionPane.showMessageDialog(rootPane,"Bienvenido "+RsBuscar.getObject("nombre"));
                 this.dispose();
-                principal inicio = new principal();
+                Pincipal inicio = new Pincipal();
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña invalidos");
                 cleanFields();
