@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-public class agregarPelicula extends JDialogMethods {
+public class PeliculaController extends JDialogMethods {
     JLabel lbId = new JLabel("Id:");
     JLabel lbTitulo = new JLabel("Titulo:");
     JLabel lbProductor = new JLabel("Productor:");
@@ -25,7 +25,7 @@ public class agregarPelicula extends JDialogMethods {
     private JButton btnEliminar = new JButton("Eliminar");
     private JButton btnConsultar = new JButton("Consultar");
 
-    public agregarPelicula(Frame owner, boolean modal) {
+    public PeliculaController(Frame owner, boolean modal) {
         super(owner, modal);
         addWindow(null, 400,400,"Agregar Pelicula", false, this);
         addLabel(lbId, 10,10,100,30, this);
