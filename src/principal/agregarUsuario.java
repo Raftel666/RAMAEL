@@ -100,8 +100,6 @@ public class agregarUsuario extends JDialogMethods implements ActionListener {
                     limpiarCampos();
                 }
             }
-
-
         } else if (e.getSource() == btnEliminar) {
             if (txtId.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "El campo del id no debe de estar vacio ");
@@ -117,7 +115,6 @@ public class agregarUsuario extends JDialogMethods implements ActionListener {
                     }
                 }
             }
-
         } else if (e.getSource() == btnModificar) {
             if (txtId.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "Campo ID no debe de estar vacío");
@@ -133,8 +130,6 @@ public class agregarUsuario extends JDialogMethods implements ActionListener {
                     }
                 }
             }
-
-
         }
         if (e.getSource() == btnSalir) {
             this.dispose();
@@ -151,7 +146,7 @@ public class agregarUsuario extends JDialogMethods implements ActionListener {
             StmModificar.setString(2, txtApellidoPaterno.getText());
             StmModificar.setString(3, txtApellidoMaterno.getText());
             StmModificar.setString(4, txtDireccion.getText());
-            StmModificar.setString(5, txtTelefono.getText());
+            StmModificar.setInt(5,  Integer.parseInt(txtTelefono.getText()));
             StmModificar.setString(6, txtCorreo.getText());
             StmModificar.setInt(7,Integer.parseInt(txtId.getText()));
 
@@ -171,16 +166,12 @@ public class agregarUsuario extends JDialogMethods implements ActionListener {
             EliminarStm.setInt(1,Integer.parseInt(txtId.getText()));
             EliminarStm.executeUpdate();
             JOptionPane.showMessageDialog(rootPane,"Dato eliminado correctamente");
-
-
-
         }catch (Exception e){
             JOptionPane.showMessageDialog(rootPane,"error"+e);
-
         }
     }
 
-    private boolean buscar(boolean  mostrar ) {
+    private boolean buscar(boolean mostrar) {
         try {
             PreparedStatement buscarStm;
             String SQL =" select*from usuarios where idUsuarios = ?";
@@ -199,12 +190,9 @@ public class agregarUsuario extends JDialogMethods implements ActionListener {
                 return true;
             }
             return false;
-
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane,"Error"+ e);
             return false;
-
         }
 
     }
@@ -234,22 +222,17 @@ public class agregarUsuario extends JDialogMethods implements ActionListener {
             StmGuardar.setString(7,txtCorreo.getText());
             StmGuardar.executeUpdate();
             JOptionPane.showMessageDialog(rootPane,"Datos insertados correctamente");
-
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(rootPane,"error"+e);
+            JOptionPane.showMessageDialog(rootPane,"Error "+e);
         }
-
     }
-
 
     @Override
     public void keyTyped(KeyEvent e) {
-
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-
     }
 
     @Override
@@ -263,14 +246,14 @@ public class agregarUsuario extends JDialogMethods implements ActionListener {
         if (!txtApellidoMaterno.getText().isEmpty()){
             textFieldWhite(txtApellidoMaterno);
         }
-        if (!txtCorreo.getText().isEmpty()){
-            textFieldWhite(txtCorreo);
-        }
         if (!txtDireccion.getText().isEmpty()){
             textFieldWhite(txtDireccion);
         }
         if (!txtTelefono.getText().isEmpty()){
             textFieldWhite(txtTelefono);
+        }
+        if (!txtCorreo.getText().isEmpty()){
+            textFieldWhite(txtCorreo);
         }
     }
 }
