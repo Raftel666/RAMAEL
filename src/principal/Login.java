@@ -47,15 +47,16 @@ public class Login extends JFrameMethods {
     private void searchUser() {
         try {
             String CadenaEncryptada = encryptar(new String(txtPass.getPassword()));
+            System.out.println("Cadena emcriptada"+ CadenaEncryptada);
             PreparedStatement StmBuscar;
-            String SQL = "select * from personal where Correo = ? and Password = ?";
+            String SQL = "select * from personal where Correro = ? and Password = ?";
             StmBuscar = Conex.MiConexion.getConexion().prepareCall(SQL);
             StmBuscar.setString(1, txtEmail.getText());
-            StmBuscar.setString(2, CadenaEncryptada);
+            StmBuscar.setString(2, txtPass.getText());
             ResultSet RsBuscar = StmBuscar.executeQuery();
             if (RsBuscar.next()){
-                JOptionPane.showMessageDialog(rootPane,"Bienvenido "+RsBuscar.getObject("nombre"));
-                this.dispose();
+                JOptionPane.showMessageDialog(rootPane,"Bienvenido ");
+                dispose();
                 Pincipal inicio = new Pincipal();
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña invalidos");
@@ -152,5 +153,12 @@ public class Login extends JFrameMethods {
             validatePassWordFieldWhite(txtPass);
             LblMensajeUs.setText("");
         }
+    }
+    private String encriptar(String password)throws NoSuchAlgorithmException
+    {
+        MessageDigest Md = MessageDigest.getInstance("MD5");
+        Md.update(password.getBytes(),0,password.length());
+        return new BigInteger(1,Md.digest()).toString();
+
     }
 }

@@ -66,7 +66,6 @@ public class Splash extends JFrame implements MouseListener, MouseMotionListener
 
     @Override
     public void mouseMoved(MouseEvent e) {
-
     }
 
     private void dormirSplash() {
@@ -76,9 +75,7 @@ public class Splash extends JFrame implements MouseListener, MouseMotionListener
             JOptionPane.showMessageDialog(rootPane, "Error:"+ex);
         }finally {
             this.dispose();
-            Pincipal ven = new Pincipal();
+            Login ven = new Login();
         }
     }
-
-
 }
