@@ -56,7 +56,7 @@ public class ConsultarUsuario extends JDialogMethods implements ActionListener, 
     private void llenarTablaUsuarios (){
         try {
             PreparedStatement buscarStm;
-            String Sql = "select *from usuarios ";
+            String Sql = "select *  from usuarios ";
             buscarStm = Conex.MiConexion.getConexion().prepareCall(Sql);
             ResultSet RsBuscar = buscarStm.executeQuery();
             ResultSetMetaData RsMD = RsBuscar.getMetaData();
