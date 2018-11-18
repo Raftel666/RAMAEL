@@ -15,7 +15,6 @@ public class ConsultarUsuario extends JDialogMethods implements ActionListener, 
     private JLabel lblid = new JLabel("Nombre");
     private JTextField txtConsultar = new JTextField();
 
-
     //Elementos para una tabla
     DefaultTableModel Modelo = new DefaultTableModel(); //1
     JTable JTabla = new JTable(Modelo); //2
@@ -35,7 +34,6 @@ public class ConsultarUsuario extends JDialogMethods implements ActionListener, 
         txtConsultar.addKeyListener(this);
         JTabla.addMouseListener(this);
 
-
         Modelo.addColumn("idUsuarios");
         Modelo.addColumn("Nombre");
         Modelo.addColumn("ApellidoPaterno");
@@ -43,8 +41,6 @@ public class ConsultarUsuario extends JDialogMethods implements ActionListener, 
         Modelo.addColumn("Direccion");
         Modelo.addColumn("Telefono");
         Modelo.addColumn("Correo");
-
-
 
         this.setVisible(true);
     }
@@ -130,21 +126,17 @@ public class ConsultarUsuario extends JDialogMethods implements ActionListener, 
 
     @Override
     public void mousePressed(MouseEvent e) {
-
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
     }
 }
