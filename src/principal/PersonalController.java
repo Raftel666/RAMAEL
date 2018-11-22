@@ -150,6 +150,8 @@ public class PersonalController extends JDialogMethods {
             StmModificar.setString(6, txtPuesto.getText());
             StmModificar.setString(7, txtCorreo.getText());
             StmModificar.setString(8, txtPassword.getText());
+            StmModificar.setString(9, txtId.getText());
+
 
             StmModificar.executeUpdate();
             JOptionPane.showMessageDialog(rootPane, "Datos actualizados correctamente");

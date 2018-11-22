@@ -70,8 +70,13 @@ public class Principal extends JFrameMethods {
             ConsultarUsuario add = new ConsultarUsuario(this, true);
         } else if (e.getSource() == MenuPersonalAgregar) {
             PersonalController add = new PersonalController(this, true);
+        } else if (e.getSource() == MenuPersonalConsultar) {
+            ConsultarPersonal add = new ConsultarPersonal(this, true);
         } else if (e.getSource() == MenuPeliculaAgregar) {
             PeliculaController add = new PeliculaController(this, true);
+        } else if (e.getSource() == MenuPeliculaConsultar) {
+            ConsultarPelicula add = new ConsultarPelicula(this, true);
+
         } else if (e.getSource() == MenuLibrosAgregar) {
             LibroController add = new LibroController(this, true);
         } else if (e.getSource() == MenuComicsAgregar) {
