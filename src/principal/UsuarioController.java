@@ -25,18 +25,17 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
     private JTextField txtCorreo = new JTextField();
     private JTextField txtDireccion = new JTextField();
     private JTextField txtTelefono = new JTextField();
+
     private JButton btnGuardar = new JButton("Guardar");
     private JButton btnModificar = new JButton("Modificar");
     private JButton btnEliminar = new JButton("Eliminar");
     private JButton btnConsultar = new JButton("Consultar");
     private JButton btnSalir = new JButton("Salir");
-
-
-
+    private JButton btnLimpiar = new JButton("Limpiar");
 
     public UsuarioController(Frame owner, boolean modal) {
         super(owner, modal);
-        addWindow(null, 400,600,"Agregar Usuario", false, this);
+        addWindow(null, 400,490,"Agregar Usuario", false, this);
         addLabel(lbId, 10,10,100,30, this);
         addLabel(lbNombre, 10,70,100,30, this);
         addLabel(lbApellidoPaterno, 10,130,150,30, this);
@@ -56,7 +55,8 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
         addButton(btnConsultar, null, 250, 100, 120, 30, this);
         addButton(btnModificar, null, 250, 160, 120, 30, this);
         addButton(btnEliminar, null, 250, 220, 120, 30, this);
-        addButton(btnSalir, null, 250, 280, 120, 30, this);
+        addButton(btnLimpiar, null, 250, 280, 120, 30, this);
+        addButton(btnSalir, null, 250, 340, 120, 30, this);
 
         this.setVisible(true);
     }
@@ -64,6 +64,9 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnGuardar) {
+            if (txtId.getText().isEmpty()) {
+                textFieldRed(txtId);
+            }
             if (txtNombre.getText().isEmpty()) {
                 textFieldRed(txtNombre);
             }
@@ -85,8 +88,20 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
                 guardar();
                 limpiarCampos();
             }
-            if (e.getSource() == btnSalir) {
-                this.dispose();
+        } else if (e.getSource() == btnModificar) {
+            if (txtId.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "Campo ID no debe de estar vacío");
+            } else {
+                if (buscar(false) == false) {
+                    JOptionPane.showMessageDialog(rootPane, "Dato no existe");
+                    limpiarCampos();
+                } else {
+                    int opc = JOptionPane.showConfirmDialog(rootPane, "Deseas modificarlo?", "Alerta!", 0, 1);
+                    if (opc == 0) {
+                        modificar();
+                        limpiarCampos();
+                    }
+                }
             }
         } else if (e.getSource() == btnConsultar) {
             if (txtId.getText().isEmpty()) {
@@ -112,24 +127,30 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
                     }
                 }
             }
-        } else if (e.getSource() == btnModificar) {
-            if (txtId.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(rootPane, "Campo ID no debe de estar vacío");
-            } else {
-                if (buscar(false) == false) {
-                    JOptionPane.showMessageDialog(rootPane, "Dato no existe");
-                    limpiarCampos();
-                } else {
-                    int opc = JOptionPane.showConfirmDialog(rootPane, "Deseas modificarlo?", "Alerta!", 0, 1);
-                    if (opc == 0) {
-                        modificar();
-                        limpiarCampos();
-                    }
-                }
-            }
+        } else if (e.getSource() == btnLimpiar){
+            limpiarCampos();
         }
         if (e.getSource() == btnSalir) {
             this.dispose();
+        }
+    }
+
+    private void guardar() {//guardar cambios
+        try {
+            PreparedStatement StmGuardar;
+            String SQL= "insert into usuarios(idUsuarios, Nombre, ApellidoPaterno, ApellidoMaterno, Direccion, Telefono, Correo) values (?, ?, ?, ?, ?, ?, ?)";
+            StmGuardar = Conex.MiConexion.getConexion().prepareCall(SQL);
+            StmGuardar.setInt(1,Integer.parseInt(txtId.getText()));
+            StmGuardar.setString(2,txtNombre.getText());
+            StmGuardar.setString(3,txtApellidoPaterno.getText());
+            StmGuardar.setString(4,txtApellidoMaterno.getText());
+            StmGuardar.setString(5,txtDireccion.getText());
+            StmGuardar.setInt(6,Integer.parseInt(txtTelefono.getText()));
+            StmGuardar.setString(7,txtCorreo.getText());
+            StmGuardar.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane,"Datos insertados correctamente");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(rootPane,"Error"+e);
         }
     }
 
@@ -148,22 +169,8 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
             StmModificar.setInt(7,Integer.parseInt(txtId.getText()));
             StmModificar.executeUpdate();
             JOptionPane.showMessageDialog(rootPane, "Datos actualizados correctamente");
-
         } catch (Exception e){
             JOptionPane.showMessageDialog(rootPane, "Error"+e);
-        }
-    }
-
-    private void Eliminar() {
-        try {
-            PreparedStatement EliminarStm;
-            String SQL = "delete from usuarios where idUsuarios = ?";
-            EliminarStm=Conex.MiConexion.getConexion().prepareCall(SQL);
-            EliminarStm.setInt(1,Integer.parseInt(txtId.getText()));
-            EliminarStm.executeUpdate();
-            JOptionPane.showMessageDialog(rootPane,"Dato eliminado correctamente");
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(rootPane,"error"+e);
         }
     }
 
@@ -192,22 +199,15 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
         }
     }
 
-    private void guardar() {//guatdar cambios
+    private void Eliminar() {
         try {
-            PreparedStatement StmGuardar;
-            String SQL= "insert into usuarios(idUsuarios, Nombre, ApellidoPaterno, ApellidoMaterno, Direccion, Telefono, Correo) values (?, ?, ?, ?, ?, ?, ?)";
-            StmGuardar = Conex.MiConexion.getConexion().prepareCall(SQL);
-            StmGuardar.setInt(1,Integer.parseInt(txtId.getText()));
-            StmGuardar.setString(2,txtNombre.getText());
-            StmGuardar.setString(3,txtApellidoPaterno.getText());
-            StmGuardar.setString(4,txtApellidoMaterno.getText());
-            StmGuardar.setString(5,txtDireccion.getText());
-            StmGuardar.setInt(6,Integer.parseInt(txtTelefono.getText()));
-            StmGuardar.setString(7,txtCorreo.getText());
-            StmGuardar.executeUpdate();
-            JOptionPane.showMessageDialog(rootPane,"Datos insertados correctamente");
-
-        } catch (SQLException e) {
+            PreparedStatement EliminarStm;
+            String SQL = "delete from usuarios where idUsuarios = ?";
+            EliminarStm=Conex.MiConexion.getConexion().prepareCall(SQL);
+            EliminarStm.setInt(1,Integer.parseInt(txtId.getText()));
+            EliminarStm.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane,"Datos eliminados correctamente");
+        }catch (Exception e){
             JOptionPane.showMessageDialog(rootPane,"error"+e);
         }
     }
@@ -233,6 +233,9 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
 
     @Override
     public void keyReleased(KeyEvent e) {
+        if (!txtId.getText().isEmpty()){
+            textFieldWhite(txtId);
+        }
         if (!txtNombre.getText().isEmpty()){
             textFieldWhite(txtNombre);
         }

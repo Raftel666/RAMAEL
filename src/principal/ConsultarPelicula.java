@@ -24,7 +24,7 @@ public class ConsultarPelicula extends JDialogMethods implements ActionListener,
 
     public ConsultarPelicula(Frame owner, boolean modal) {
         super(owner,modal);
-        addWindow(null, 800,600,"Consultar personal", false, this);
+        addWindow(null, 800,650,"Consultar personal", false, this);
         addButton(btnConsultar, null, 550, 35, 120, 30, this);
         addButton(btnSalir, null, 550, 70, 120, 30, this);
         addTextField(txtConsultar, 220, 35, 300, 30, null, this);

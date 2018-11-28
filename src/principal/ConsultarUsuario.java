@@ -9,13 +9,12 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 
 public class ConsultarUsuario extends JDialogMethods implements ActionListener, KeyListener, MouseListener {
+
     public static String CadenaCodigo = null;
     private JButton btnConsultar = new JButton("Consultar");
     private JButton btnSalir = new JButton("Salir");
     private JLabel lblid = new JLabel("Nombre");
     private JTextField txtConsultar = new JTextField();
-
-    //Elementos para una tabla
     DefaultTableModel Modelo = new DefaultTableModel(); //1
     JTable JTabla = new JTable(Modelo); //2
     JScrollPane ScrollTabla = new JScrollPane(JTabla); //3

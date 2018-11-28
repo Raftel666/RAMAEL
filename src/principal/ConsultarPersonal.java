@@ -28,6 +28,7 @@ public class ConsultarPersonal extends JDialogMethods implements ActionListener,
         addLabel(lblid,150,35,140,40,this);
         ScrollTabla.setBounds(60,120,670,400);
         this.add(ScrollTabla);
+
         txtConsultar.addKeyListener(this);
         inicializarTabla();
         llenarTablaPersonal();
