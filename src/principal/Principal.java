@@ -61,7 +61,6 @@ public class Principal extends JFrameMethods {
         addMenuItem(MenuComics, MenuComicsConsultar, null, this);
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == MenuUsuarioAgregar) {
@@ -76,14 +75,18 @@ public class Principal extends JFrameMethods {
             PeliculaController add = new PeliculaController(this, true);
         } else if (e.getSource() == MenuPeliculaConsultar) {
             ConsultarPelicula add = new ConsultarPelicula(this, true);
-
         } else if (e.getSource() == MenuLibrosAgregar) {
             LibroController add = new LibroController(this, true);
+        } else if (e.getSource() == MenuLibrosConsultar) {
+            ConsultarLibro add = new ConsultarLibro(this, true);
         } else if (e.getSource() == MenuComicsAgregar) {
             ComicController add = new ComicController(this, true);
+        } else if (e.getSource() == MenuComicsConsultar) {
+            ConsultarComic add = new ConsultarComic(this, true);
         }
     }
-        @Override
+
+    @Override
     public void keyTyped(KeyEvent e) {
     }
 
@@ -113,6 +116,5 @@ public class Principal extends JFrameMethods {
 
     @Override
     public void mouseExited(MouseEvent e) {
-
     }
 }

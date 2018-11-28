@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 public class ComicController extends JDialogMethods {
     JLabel lbId = new JLabel("Id:");
@@ -157,7 +158,7 @@ public class ComicController extends JDialogMethods {
             String Sql = "update comics set Titulo = ?, Fecha = ?, Autor = ?, Editorial = ?, Genero = ?, Franquicia = ?, NoEjemplares = ?, Tipo = ? where idComics = ?";
             StmModificar = Conex.MiConexion.getConexion().prepareCall(Sql);
             StmModificar.setString(1, txtTitulo.getText());
-            //StmModificar.setDate(2, );
+            //StmModificar.setTimestamp(2,);
             StmModificar.setString(3, txtAutor.getText());
             StmModificar.setString(4, txtEditorial.getText());
             StmModificar.setString(5, txtGenero.getText());

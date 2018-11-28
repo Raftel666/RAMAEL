@@ -10,31 +10,29 @@ import java.sql.ResultSetMetaData;
 
 public class ConsultarPersonal extends JDialogMethods implements ActionListener, KeyListener, MouseListener {
 
-    public static String CadenaCodigo; //Variable compartida todo mundo la conoce
+    public static String CadenaCodigo;
     private JButton btnConsultar = new JButton("Consultar");
     private JButton btnSalir = new JButton("Salir");
     private JLabel lblid = new JLabel("Nombre");
     private JTextField txtConsultar = new JTextField();
-    DefaultTableModel Modelo = new DefaultTableModel(); //1
-    JTable JTabla = new JTable(Modelo); //2
-    JScrollPane ScrollTabla = new JScrollPane(JTabla); //3
+    DefaultTableModel Modelo = new DefaultTableModel();
+    JTable JTabla = new JTable(Modelo);
+    JScrollPane ScrollTabla = new JScrollPane(JTabla);
 
     public ConsultarPersonal(Frame owner, boolean modal) {
         super(owner, modal);
-        addWindow(null, 800,600,"Consultar personal", false, this);
+        addWindow(null, 800,600,"Consultar Personal", false, this);
         addButton(btnConsultar, null, 550, 35, 120, 30, this);
-        addButton(btnSalir, null, 550, 70, 120, 30, this);
+        addButton(btnSalir, null, 550, 80, 120, 30, this);
         addTextField(txtConsultar, 220, 35, 300, 30, null, this);
         addLabel(lblid,150,35,140,40,this);
         ScrollTabla.setBounds(60,120,670,400);
         this.add(ScrollTabla);
-
         txtConsultar.addKeyListener(this);
         inicializarTabla();
         llenarTablaPersonal();
 
         this.setVisible(true);
-
     }
 
     private void inicializarTabla() {
@@ -47,13 +45,16 @@ public class ConsultarPersonal extends JDialogMethods implements ActionListener,
         Modelo.addColumn("Puesto");
         Modelo.addColumn("Correo");
         Modelo.addColumn("Password");
+    }
 
+    private void LimpiarTabla(){
+        Modelo.setRowCount(0);
     }
 
     private void llenarTablaPersonal() {
         try {
             PreparedStatement buscarStm;
-            String SQL = "select * from personal order by idPersonal desc";
+            String SQL = "select * from personal order by idPersonal asc";
             buscarStm = Conex.MiConexion.getConexion().prepareCall(SQL);
             ResultSet RsBuscar = buscarStm.executeQuery();
             ResultSetMetaData RsMD = RsBuscar.getMetaData();
@@ -68,22 +69,6 @@ public class ConsultarPersonal extends JDialogMethods implements ActionListener,
         } catch (Exception e){
             JOptionPane.showMessageDialog(rootPane,"Error: "+e);
         }
-    }
-
-    private void LimpiarTabla(){
-        Modelo.setRowCount(0);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
     }
 
     private void buscarFrase() {
@@ -108,6 +93,13 @@ public class ConsultarPersonal extends JDialogMethods implements ActionListener,
     }
 
     @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==btnSalir) {
+            this.dispose();
+        }
+    }
+
+    @Override
     public void keyReleased(KeyEvent e) {
         if (e.getSource() == txtConsultar){
             buscarFrase();
@@ -116,26 +108,36 @@ public class ConsultarPersonal extends JDialogMethods implements ActionListener,
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        if(e.getSource() == JTabla){
+            int FilaSeleccionada = JTabla.getSelectedRow();
+            Object Codigo = Modelo.getValueAt(FilaSeleccionada, 0);
+            CadenaCodigo = Codigo.toString();
+        }else if(e.getSource() == btnConsultar) {
+            this.dispose();
+        }
+    }
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
     }
 }
