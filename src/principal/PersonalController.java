@@ -251,47 +251,60 @@ public class PersonalController extends JDialogMethods implements KeyListener {
         }
     }
 
+    private boolean validaCampoEntero(String Cadena, int longitud) {
+        if (Cadena.matches("[0-9,.]+") && Cadena.length() < longitud + 1) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Debes de teclear solo números y no \ndebe de " +
+                    "estar vacio el campo \ny la longitud no debe de ser mayor a" + longitud, "Alerta!!!", 0);
+            return false;
+        }
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
     }
 
     @Override
-    public void keyPressed(KeyEvent e){
-        if (e.getSource() == txtId){
-            if (e.getKeyChar() == e.VK_ENTER){
-                txtNombre.requestFocus();
-            }
-        } else if (e.getSource() == txtNombre) {
-            if (e.getKeyChar() == e.VK_ENTER){
-                txtApellidoPaterno.requestFocus();
-            }
-        } else if (e.getSource() == txtApellidoPaterno) {
-            if (e.getKeyChar() == e.VK_ENTER){
-                txtApellidoMaterno.requestFocus();
-            }
-        } else if (e.getSource() == txtApellidoMaterno) {
-            if (e.getKeyChar() == e.VK_ENTER){
-                txtDireccion.requestFocus();
-            }
-        } else if (e.getSource() == txtDireccion) {
-            if (e.getKeyChar() == e.VK_ENTER){
-                txtTelefono.requestFocus();
-            }
-        } else if (e.getSource() == txtTelefono) {
-            if (e.getKeyChar() == e.VK_ENTER){
-                txtPuesto.requestFocus();
-            }
-        } else if (e.getSource() == txtPuesto) {
-            if (e.getKeyChar() == e.VK_ENTER){
-                txtCorreo.requestFocus();
-            }
-        } else if (e.getSource() == txtCorreo) {
-            if (e.getKeyChar() == e.VK_ENTER){
-                txtPassword.requestFocus();
-            }
-        } else if (e.getSource() == txtPassword) {
-            if (e.getKeyChar() == e.VK_ENTER){
-                btnGuardar.requestFocus();
+    public void keyPressed(KeyEvent e) {
+        if (e.getSource() == txtId) {
+            if (e.getKeyChar() == e.VK_ENTER) {
+                if (validaCampoEntero(txtId.getText(), 11) == true) {
+                    txtNombre.requestFocus();
+                } else
+                    txtId.setText("");
+            } else if (e.getSource() == txtNombre) {
+                if (e.getKeyChar() == e.VK_ENTER) {
+                    txtApellidoPaterno.requestFocus();
+                }
+            } else if (e.getSource() == txtApellidoPaterno) {
+                if (e.getKeyChar() == e.VK_ENTER) {
+                    txtApellidoMaterno.requestFocus();
+                }
+            } else if (e.getSource() == txtApellidoMaterno) {
+                if (e.getKeyChar() == e.VK_ENTER) {
+                    txtDireccion.requestFocus();
+                }
+            } else if (e.getSource() == txtDireccion) {
+                if (e.getKeyChar() == e.VK_ENTER) {
+                    txtTelefono.requestFocus();
+                }
+            } else if (e.getSource() == txtTelefono) {
+                if (e.getKeyChar() == e.VK_ENTER) {
+                    txtPuesto.requestFocus();
+                }
+            } else if (e.getSource() == txtPuesto) {
+                if (e.getKeyChar() == e.VK_ENTER) {
+                    txtCorreo.requestFocus();
+                }
+            } else if (e.getSource() == txtCorreo) {
+                if (e.getKeyChar() == e.VK_ENTER) {
+                    txtPassword.requestFocus();
+                }
+            } else if (e.getSource() == txtPassword) {
+                if (e.getKeyChar() == e.VK_ENTER) {
+                    btnGuardar.requestFocus();
+                }
             }
         }
     }
@@ -325,3 +338,4 @@ public class PersonalController extends JDialogMethods implements KeyListener {
 
     }
 }
+

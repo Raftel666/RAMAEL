@@ -22,7 +22,7 @@ public class ComicController extends JDialogMethods {
 
     JTextField txtId = new JTextField();
     JTextField txtTitulo = new JTextField();
-    JTextField txtFecha= new JTextField();
+    JTextField txtFecha = new JTextField();
     JTextField txtAutor = new JTextField();
     JTextField txtEditorial = new JTextField();
     JTextField txtGenero = new JTextField();
@@ -36,15 +36,14 @@ public class ComicController extends JDialogMethods {
     private JButton btnEliminar = new JButton("Eliminar");
     private JButton btnConsultar = new JButton("Consultar");
     private JButton btnLimpiar = new JButton("Limpiar");
-    //YOlo Manolo
 
     public ComicController(Frame owner, boolean modal) {
         super(owner, modal);
-        addWindow(null, 400,610,"Agregar Comic-Manga", false, this);
+        addWindow(null, 400, 610, "Agregar Comic-Manga", false, this);
 
-        addLabel(lbId, 10,10,100,30, this);
-        addLabel(lbTitulo, 10,70,100,30, this);
-        addLabel(lbFecha, 10,130,150,30, this);
+        addLabel(lbId, 10, 10, 100, 30, this);
+        addLabel(lbTitulo, 10, 70, 100, 30, this);
+        addLabel(lbFecha, 10, 130, 150, 30, this);
         addLabel(lbAutor, 10, 190, 150, 30, this);
         addLabel(lbEditorial, 10, 250, 150, 30, this);
         addLabel(lbGenero, 10, 310, 150, 30, this);
@@ -59,8 +58,8 @@ public class ComicController extends JDialogMethods {
         addButton(btnLimpiar, null, 250, 280, 120, 30, this);
         addButton(btnSalir, null, 250, 340, 120, 30, this);
 
-        addTextField(txtId, 10, 40, 200,30, "Id...", this);
-        addTextField(txtTitulo, 10, 100, 200,30, "Titulo...", this);
+        addTextField(txtId, 10, 40, 200, 30, "Id...", this);
+        addTextField(txtTitulo, 10, 100, 200, 30, "Titulo...", this);
         addTextField(txtFecha, 10, 160, 200, 30, "Fecha...", this);
         addTextField(txtAutor, 10, 220, 200, 30, "Autor...", this);
         addTextField(txtEditorial, 10, 280, 200, 30, "Editorial...", this);
@@ -74,7 +73,7 @@ public class ComicController extends JDialogMethods {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == btnGuardar){
+        if (e.getSource() == btnGuardar) {
             if (txtId.getText().isEmpty()) textFieldRed(txtId);
             if (txtTitulo.getText().isEmpty()) textFieldRed(txtTitulo);
             if (txtFecha.getText().isEmpty()) textFieldRed(txtFecha);
@@ -84,7 +83,7 @@ public class ComicController extends JDialogMethods {
             if (txtFranquicia.getText().isEmpty()) textFieldRed(txtFranquicia);
             if (txtEjemplar.getText().isEmpty()) textFieldRed(txtEjemplar);
             if (txtTipo.getText().isEmpty()) textFieldRed(txtTipo);
-            } else if (e.getSource() == btnModificar) {
+        } else if (e.getSource() == btnModificar) {
             if (txtId.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "Campo ID no debe de estar vacío");
             } else {
@@ -123,10 +122,10 @@ public class ComicController extends JDialogMethods {
                     }
                 }
             }
-        } else if (e.getSource() == btnLimpiar){
+        } else if (e.getSource() == btnLimpiar) {
             limpiarCampos();
         }
-        if(e.getSource()==btnSalir){
+        if (e.getSource() == btnSalir) {
             this.dispose();
         }
     }
@@ -134,22 +133,22 @@ public class ComicController extends JDialogMethods {
     private void guardar() {
         try {
             PreparedStatement StmGuardar;
-            String SQL= "insert into comics(idComics, Titulo, Fecha, Autor, Editorial, Genero, Franquicia, " +
+            String SQL = "insert into comics(idComics, Titulo, Fecha, Autor, Editorial, Genero, Franquicia, " +
                     "NoEjemplares, Tipo) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             StmGuardar = Conex.MiConexion.getConexion().prepareCall(SQL);
-            StmGuardar.setInt(1,Integer.parseInt(txtId.getText()));
-            StmGuardar.setString(2,txtTitulo.getText());
+            StmGuardar.setInt(1, Integer.parseInt(txtId.getText()));
+            StmGuardar.setString(2, txtTitulo.getText());
             StmGuardar.setDate(3, java.sql.Date.valueOf(txtFecha.getText()));
-            StmGuardar.setString(4,txtAutor.getText());
-            StmGuardar.setString(5,txtEditorial.getText());
-            StmGuardar.setString(6,txtGenero.getText());
-            StmGuardar.setString(7,txtFranquicia.getText());
-            StmGuardar.setInt(8,Integer.parseInt(txtEjemplar.getText()));
-            StmGuardar.setString(9,txtTipo.getText());
+            StmGuardar.setString(4, txtAutor.getText());
+            StmGuardar.setString(5, txtEditorial.getText());
+            StmGuardar.setString(6, txtGenero.getText());
+            StmGuardar.setString(7, txtFranquicia.getText());
+            StmGuardar.setInt(8, Integer.parseInt(txtEjemplar.getText()));
+            StmGuardar.setString(9, txtTipo.getText());
             StmGuardar.executeUpdate();
-            JOptionPane.showMessageDialog(rootPane,"Datos insertados correctamente");
+            JOptionPane.showMessageDialog(rootPane, "Datos insertados correctamente");
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(rootPane,"Error"+e);
+            JOptionPane.showMessageDialog(rootPane, "Error" + e);
         }
     }
 
@@ -170,20 +169,20 @@ public class ComicController extends JDialogMethods {
             StmModificar.setInt(9, Integer.parseInt(txtId.getText()));
             StmModificar.executeUpdate();
             JOptionPane.showMessageDialog(rootPane, "Datos actualizados correctamente");
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(rootPane, "Error"+e);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Error" + e);
         }
     }
 
-    private boolean buscar(boolean mostrar ) {
+    private boolean buscar(boolean mostrar) {
         try {
             PreparedStatement buscarStm;
-            String SQL =" select*from comics where idComics = ?";
-            buscarStm= Conex.MiConexion.getConexion().prepareCall(SQL);
-            buscarStm.setInt(1,Integer.parseInt(txtId.getText()));
+            String SQL = " select*from comics where idComics = ?";
+            buscarStm = Conex.MiConexion.getConexion().prepareCall(SQL);
+            buscarStm.setInt(1, Integer.parseInt(txtId.getText()));
             ResultSet RsBuscar = buscarStm.executeQuery();
-            while(RsBuscar.next()){
-                if(mostrar){
+            while (RsBuscar.next()) {
+                if (mostrar) {
                     txtTitulo.setText(RsBuscar.getObject("titulo").toString());
                     txtFecha.setText(RsBuscar.getObject("fecha").toString());
                     txtAutor.setText(RsBuscar.getObject("autor").toString());
@@ -197,7 +196,7 @@ public class ComicController extends JDialogMethods {
             }
             return false;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane,"Error"+ e);
+            JOptionPane.showMessageDialog(rootPane, "Error" + e);
             return false;
         }
     }
@@ -206,12 +205,12 @@ public class ComicController extends JDialogMethods {
         try {
             PreparedStatement EliminarStm;
             String SQL = "delete from comics where idComics= ?";
-            EliminarStm=Conex.MiConexion.getConexion().prepareCall(SQL);
-            EliminarStm.setInt(1,Integer.parseInt(txtId.getText()));
+            EliminarStm = Conex.MiConexion.getConexion().prepareCall(SQL);
+            EliminarStm.setInt(1, Integer.parseInt(txtId.getText()));
             EliminarStm.executeUpdate();
-            JOptionPane.showMessageDialog(rootPane,"Datos eliminados correctamente");
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(rootPane,"Error"+e);
+            JOptionPane.showMessageDialog(rootPane, "Datos eliminados correctamente");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Error" + e);
         }
     }
 
@@ -228,6 +227,17 @@ public class ComicController extends JDialogMethods {
         txtId.requestFocus();
     }
 
+    private boolean validaCampoEntero(String Cadena, int longitud) {
+        if (Cadena.matches("[0-9,.]+") && Cadena.length() < longitud + 1) {
+            return true;
+        }
+        else {
+            JOptionPane.showMessageDialog(rootPane, "Debes de teclear solo números y no \ndebe de "+
+                    "estar vacio el campo \ny la longitud no debe de ser mayor a"+longitud,"Alerta!!!",0);
+            return false;
+        }
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {}
 
@@ -235,7 +245,10 @@ public class ComicController extends JDialogMethods {
     public void keyPressed(KeyEvent e){
         if (e.getSource() == txtId){
             if (e.getKeyChar() == e.VK_ENTER){
-                txtTitulo.requestFocus();
+                if (validaCampoEntero(txtId.getText(), 11) == true) {
+                    txtTitulo.requestFocus();
+            } else
+                txtId.setText("");
             }
         } else if (e.getSource() == txtTitulo) {
             if (e.getKeyChar() == e.VK_ENTER){
@@ -263,7 +276,10 @@ public class ComicController extends JDialogMethods {
             }
         } else if (e.getSource() == txtEjemplar) {
             if (e.getKeyChar() == e.VK_ENTER){
+                if (validaCampoEntero(txtEjemplar.getText(), 11) == true) {
                 txtTipo.requestFocus();
+            } else
+                txtEjemplar.setText("");
             }
         } else if (e.getSource() == txtTipo) {
             if (e.getKeyChar() == e.VK_ENTER){

@@ -30,7 +30,6 @@ public class PeliculaController extends JDialogMethods {
     private JButton btnConsultar = new JButton("Consultar");
     private JButton btnLimpiar = new JButton("Limpiar");
 
-
     public PeliculaController(Frame owner, boolean modal) {
         super(owner, modal);
         addWindow(null, 400,430,"Agregar Pelicula", false, this);
@@ -114,6 +113,16 @@ public class PeliculaController extends JDialogMethods {
         }
     }
 
+    private void limpiarCampos() {
+        txtId.setText("");
+        txtTitulo.setText("");
+        txtProductor.setText("");
+        txtDuracion.setText("");
+        txtGenero.setText("");
+        txtTipo.setText("");
+        txtId.requestFocus();
+    }
+
     private void guardar() {
         try {
             PreparedStatement StmGuardar;
@@ -187,14 +196,14 @@ public class PeliculaController extends JDialogMethods {
         }
     }
 
-    private void limpiarCampos() {
-        txtId.setText("");
-        txtTitulo.setText("");
-        txtProductor.setText("");
-        txtDuracion.setText("");
-        txtGenero.setText("");
-        txtTipo.setText("");
-        txtId.requestFocus();
+    private boolean validaCampoEntero(String Cadena, int longitud) {
+        if (Cadena.matches("[0-9,.]+") && Cadena.length() < longitud + 1) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Debes de teclear solo números y no \ndebe de " +
+                    "estar vacio el campo \ny la longitud no debe de ser mayor a" + longitud, "Alerta!!!", 0);
+            return false;
+        }
     }
 
     @Override
@@ -204,7 +213,10 @@ public class PeliculaController extends JDialogMethods {
     public void keyPressed(KeyEvent e) {
         if (e.getSource() == txtId){
             if (e.getKeyChar() == e.VK_ENTER){
+                if (validaCampoEntero(txtId.getText(), 11) == true) {
                 txtTitulo.requestFocus();
+            } else
+                txtId.setText("");
             }
         } else if (e.getSource() == txtTitulo) {
             if (e.getKeyChar() == e.VK_ENTER){
@@ -216,7 +228,10 @@ public class PeliculaController extends JDialogMethods {
             }
         } else if (e.getSource() == txtDuracion) {
             if (e.getKeyChar() == e.VK_ENTER){
+                if (validaCampoEntero(txtDuracion.getText(), 11) == true) {
                 txtGenero.requestFocus();
+            } else
+                txtDuracion.setText("");
             }
         } else if (e.getSource() == txtGenero) {
             if (e.getKeyChar() == e.VK_ENTER){

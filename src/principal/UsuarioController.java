@@ -35,17 +35,17 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
 
     public UsuarioController(Frame owner, boolean modal) {
         super(owner, modal);
-        addWindow(null, 400,490,"Agregar Usuario", false, this);
-        addLabel(lbId, 10,10,100,30, this);
-        addLabel(lbNombre, 10,70,100,30, this);
-        addLabel(lbApellidoPaterno, 10,130,150,30, this);
+        addWindow(null, 400, 490, "Agregar Usuario", false, this);
+        addLabel(lbId, 10, 10, 100, 30, this);
+        addLabel(lbNombre, 10, 70, 100, 30, this);
+        addLabel(lbApellidoPaterno, 10, 130, 150, 30, this);
         addLabel(lbApellidoMaterno, 10, 190, 150, 30, this);
         addLabel(lbCorreo, 10, 250, 150, 30, this);
         addLabel(lbDireccion, 10, 310, 150, 30, this);
         addLabel(lbTelefono, 10, 370, 150, 30, this);
 
-        addTextField(txtId, 10, 40, 200,30, "id...", this);
-        addTextField(txtNombre, 10, 100, 200,30, "Nombre...", this);
+        addTextField(txtId, 10, 40, 200, 30, "id...", this);
+        addTextField(txtNombre, 10, 100, 200, 30, "Nombre...", this);
         addTextField(txtApellidoPaterno, 10, 160, 200, 30, "Apellido paterno", this);
         addTextField(txtApellidoMaterno, 10, 220, 200, 30, "Apellido materno", this);
         addTextField(txtCorreo, 10, 280, 200, 30, "Correo", this);
@@ -138,7 +138,7 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
                     }
                 }
             }
-        } else if (e.getSource() == btnLimpiar){
+        } else if (e.getSource() == btnLimpiar) {
             limpiarCampos();
         }
         if (e.getSource() == btnSalir) {
@@ -149,19 +149,19 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
     private void guardar() {//guardar cambios
         try {
             PreparedStatement StmGuardar;
-            String SQL= "insert into usuarios(idUsuarios, Nombre, ApellidoPaterno, ApellidoMaterno, Direccion, Telefono, Correo) values (?, ?, ?, ?, ?, ?, ?)";
+            String SQL = "insert into usuarios(idUsuarios, Nombre, ApellidoPaterno, ApellidoMaterno, Direccion, Telefono, Correo) values (?, ?, ?, ?, ?, ?, ?)";
             StmGuardar = Conex.MiConexion.getConexion().prepareCall(SQL);
-            StmGuardar.setInt(1,Integer.parseInt(txtId.getText()));
-            StmGuardar.setString(2,txtNombre.getText());
-            StmGuardar.setString(3,txtApellidoPaterno.getText());
-            StmGuardar.setString(4,txtApellidoMaterno.getText());
-            StmGuardar.setString(5,txtDireccion.getText());
-            StmGuardar.setInt(6,Integer.parseInt(txtTelefono.getText()));
-            StmGuardar.setString(7,txtCorreo.getText());
+            StmGuardar.setInt(1, Integer.parseInt(txtId.getText()));
+            StmGuardar.setString(2, txtNombre.getText());
+            StmGuardar.setString(3, txtApellidoPaterno.getText());
+            StmGuardar.setString(4, txtApellidoMaterno.getText());
+            StmGuardar.setString(5, txtDireccion.getText());
+            StmGuardar.setInt(6, Integer.parseInt(txtTelefono.getText()));
+            StmGuardar.setString(7, txtCorreo.getText());
             StmGuardar.executeUpdate();
-            JOptionPane.showMessageDialog(rootPane,"Datos insertados correctamente");
+            JOptionPane.showMessageDialog(rootPane, "Datos insertados correctamente");
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(rootPane,"Error"+e);
+            JOptionPane.showMessageDialog(rootPane, "Error" + e);
         }
     }
 
@@ -177,23 +177,23 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
             StmModificar.setString(4, txtDireccion.getText());
             StmModificar.setString(5, txtTelefono.getText());
             StmModificar.setString(6, txtCorreo.getText());
-            StmModificar.setInt(7,Integer.parseInt(txtId.getText()));
+            StmModificar.setInt(7, Integer.parseInt(txtId.getText()));
             StmModificar.executeUpdate();
             JOptionPane.showMessageDialog(rootPane, "Datos actualizados correctamente");
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(rootPane, "Error"+e);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Error" + e);
         }
     }
 
-    private boolean buscar(boolean mostrar ) {
+    private boolean buscar(boolean mostrar) {
         try {
             PreparedStatement buscarStm;
-            String SQL =" select*from usuarios where idUsuarios = ?";
-            buscarStm= Conex.MiConexion.getConexion().prepareCall(SQL);
-            buscarStm.setInt(1,Integer.parseInt(txtId.getText()));
+            String SQL = " select*from usuarios where idUsuarios = ?";
+            buscarStm = Conex.MiConexion.getConexion().prepareCall(SQL);
+            buscarStm.setInt(1, Integer.parseInt(txtId.getText()));
             ResultSet RsBuscar = buscarStm.executeQuery();
-            while(RsBuscar.next()){
-                if(mostrar){
+            while (RsBuscar.next()) {
+                if (mostrar) {
                     txtNombre.setText(RsBuscar.getObject("nombre").toString());
                     txtApellidoPaterno.setText(RsBuscar.getObject("apellidoPaterno").toString());
                     txtApellidoMaterno.setText(RsBuscar.getObject("apellidoMaterno").toString());
@@ -205,7 +205,7 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
             }
             return false;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane,"Error"+ e);
+            JOptionPane.showMessageDialog(rootPane, "Error" + e);
             return false;
         }
     }
@@ -214,15 +214,24 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
         try {
             PreparedStatement EliminarStm;
             String SQL = "delete from usuarios where idUsuarios = ?";
-            EliminarStm=Conex.MiConexion.getConexion().prepareCall(SQL);
-            EliminarStm.setInt(1,Integer.parseInt(txtId.getText()));
+            EliminarStm = Conex.MiConexion.getConexion().prepareCall(SQL);
+            EliminarStm.setInt(1, Integer.parseInt(txtId.getText()));
             EliminarStm.executeUpdate();
-            JOptionPane.showMessageDialog(rootPane,"Datos eliminados correctamente");
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(rootPane,"error"+e);
+            JOptionPane.showMessageDialog(rootPane, "Datos eliminados correctamente");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "error" + e);
         }
     }
 
+    private boolean validaCampoEntero(String Cadena, int longitud) {
+        if (Cadena.matches("[0-9,.]+") && Cadena.length() < longitud + 1) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Debes de teclear solo números y no \ndebe de " +
+                    "estar vacio el campo \ny la longitud no debe de ser mayor a" + longitud, "Alerta!!!", 0);
+            return false;
+        }
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -230,59 +239,62 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getSource() == txtId){
-            if (e.getKeyChar() == e.VK_ENTER){
-                txtNombre.requestFocus();
-            }
-        } else if (e.getSource() == txtNombre) {
-            if (e.getKeyChar() == e.VK_ENTER){
-                txtApellidoPaterno.requestFocus();
-            }
-        } else if (e.getSource() == txtApellidoPaterno) {
-            if (e.getKeyChar() == e.VK_ENTER){
-                txtApellidoMaterno.requestFocus();
-            }
-        } else if (e.getSource() == txtApellidoMaterno) {
-            if (e.getKeyChar() == e.VK_ENTER){
-                txtCorreo.requestFocus();
-            }
-        } else if (e.getSource() == txtCorreo) {
-            if (e.getKeyChar() == e.VK_ENTER){
-                txtDireccion.requestFocus();
-            }
-        } else if (e.getSource() == txtDireccion) {
-            if (e.getKeyChar() == e.VK_ENTER){
-                txtTelefono.requestFocus();
-            }
-        } else if (e.getSource() == txtTelefono) {
-            if (e.getKeyChar() == e.VK_ENTER){
-                btnGuardar.requestFocus();
+        if (e.getSource() == txtId) {
+            if (e.getKeyChar() == e.VK_ENTER) {
+                if (validaCampoEntero(txtId.getText(), 11) == true) {
+                    txtNombre.requestFocus();
+                } else
+                    txtId.setText("");
+            } else if (e.getSource() == txtNombre) {
+                if (e.getKeyChar() == e.VK_ENTER) {
+                    txtApellidoPaterno.requestFocus();
+                }
+            } else if (e.getSource() == txtApellidoPaterno) {
+                if (e.getKeyChar() == e.VK_ENTER) {
+                    txtApellidoMaterno.requestFocus();
+                }
+            } else if (e.getSource() == txtApellidoMaterno) {
+                if (e.getKeyChar() == e.VK_ENTER) {
+                    txtCorreo.requestFocus();
+                }
+            } else if (e.getSource() == txtCorreo) {
+                if (e.getKeyChar() == e.VK_ENTER) {
+                    txtDireccion.requestFocus();
+                }
+            } else if (e.getSource() == txtDireccion) {
+                if (e.getKeyChar() == e.VK_ENTER) {
+                    txtTelefono.requestFocus();
+                }
+            } else if (e.getSource() == txtTelefono) {
+                if (e.getKeyChar() == e.VK_ENTER) {
+                    btnGuardar.requestFocus();
+                }
             }
         }
     }
 
-    @Override
-    public void keyReleased(KeyEvent e) {
-        if (!txtId.getText().isEmpty()){
-            textFieldWhite(txtId);
-        }
-        if (!txtNombre.getText().isEmpty()){
-            textFieldWhite(txtNombre);
-        }
-        if (!txtApellidoPaterno.getText().isEmpty()){
-            textFieldWhite(txtApellidoPaterno);
-        }
-        if (!txtApellidoMaterno.getText().isEmpty()){
-            textFieldWhite(txtApellidoMaterno);
-        }
-        if (!txtCorreo.getText().isEmpty()){
-            textFieldWhite(txtCorreo);
-        }
-        if (!txtDireccion.getText().isEmpty()){
-            textFieldWhite(txtDireccion);
-        }
-        if (!txtTelefono.getText().isEmpty()){
-            textFieldWhite(txtTelefono);
+        @Override
+        public void keyReleased (KeyEvent e){
+            if (!txtId.getText().isEmpty()) {
+                textFieldWhite(txtId);
+            }
+            if (!txtNombre.getText().isEmpty()) {
+                textFieldWhite(txtNombre);
+            }
+            if (!txtApellidoPaterno.getText().isEmpty()) {
+                textFieldWhite(txtApellidoPaterno);
+            }
+            if (!txtApellidoMaterno.getText().isEmpty()) {
+                textFieldWhite(txtApellidoMaterno);
+            }
+            if (!txtCorreo.getText().isEmpty()) {
+                textFieldWhite(txtCorreo);
+            }
+            if (!txtDireccion.getText().isEmpty()) {
+                textFieldWhite(txtDireccion);
+            }
+            if (!txtTelefono.getText().isEmpty()) {
+                textFieldWhite(txtTelefono);
+            }
         }
     }
-}
