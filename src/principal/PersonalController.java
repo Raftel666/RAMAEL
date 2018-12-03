@@ -45,11 +45,11 @@ public class PersonalController extends JDialogMethods implements KeyListener {
         addLabel(lbNombre, 10,70,100,30, this);
         addLabel(lbApellidoPaterno, 10,130,150,30, this);
         addLabel(lbApellidoMaterno, 10, 190, 150, 30, this);
-        addLabel(lbCorreo, 10, 250, 150, 30, this);
-        addLabel(lbPassword, 10, 310, 150, 30, this);
-        addLabel(lbDireccion, 10, 370, 150, 30, this);
-        addLabel(lbTelefono, 10, 430, 150, 30, this);
-        addLabel(lbPuesto, 10, 490, 150, 30, this);
+        addLabel(lbDireccion, 10, 250, 150, 30, this);
+        addLabel(lbTelefono, 10, 310, 150, 30, this);
+        addLabel(lbPuesto, 10, 370, 150, 30, this);
+        addLabel(lbCorreo, 10, 430, 150, 30, this);
+        addLabel(lbPassword, 10, 490, 150, 30, this);
 
         addButton(btnGuardar, null, 250, 40, 120, 30, this);
         addButton(btnConsultar, null, 250, 100, 120, 30, this);
@@ -62,12 +62,24 @@ public class PersonalController extends JDialogMethods implements KeyListener {
         addTextField(txtNombre, 10, 100, 200,30, "Nombre...", this);
         addTextField(txtApellidoPaterno, 10, 160, 200, 30, "Apellido paterno...", this);
         addTextField(txtApellidoMaterno, 10, 220, 200, 30, "Apellido materno...", this);
-        addTextField(txtCorreo, 10, 280, 200, 30, "Correo...", this);
-        addTextField(txtPassword, 10, 340, 200,30, "Password...", this);
-        addTextField(txtDireccion, 10, 400, 200, 30, "Dirección...", this);
-        addTextField(txtTelefono, 10, 460, 200, 30, "Telefono...", this);
-        addTextField(txtPuesto, 10, 520, 200, 30, "Puesto...", this);
+        addTextField(txtDireccion, 10, 280, 200, 30, "Correo...", this);
+        addTextField(txtTelefono, 10, 340, 200,30, "Password...", this);
+        addTextField(txtPuesto, 10, 400, 200, 30, "Dirección...", this);
+        addTextField(txtCorreo, 10, 460, 200, 30, "Telefono...", this);
+        addTextField(txtPassword, 10, 520, 200, 30, "Puesto...", this);
         this.setVisible(true);
+    }
+
+    private void limpiarCampos() {
+        txtId.setText("");
+        txtNombre.setText("");
+        txtApellidoPaterno.setText("");
+        txtApellidoMaterno.setText("");
+        txtDireccion.setText("");
+        txtTelefono.setText("");
+        txtPuesto.setText("");
+        txtCorreo.setText("");
+        txtPassword.setText("");
     }
 
     @Override
@@ -152,11 +164,34 @@ public class PersonalController extends JDialogMethods implements KeyListener {
         }
     }
 
+    private void guardar() {
+        try {
+            PreparedStatement StmGuardar;
+            String SQL= "insert into personal(idPersonal, Nombre, ApellidoPaterno, ApellidoMaterno, Direccion, Telefono, Puesto, Correo, Password) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            StmGuardar = Conex.MiConexion.getConexion().prepareCall(SQL);
+            StmGuardar.setInt(1,Integer.parseInt(txtId.getText()));
+            StmGuardar.setString(2,txtNombre.getText());
+            StmGuardar.setString(3,txtApellidoPaterno.getText());
+            StmGuardar.setString(4,txtApellidoMaterno.getText());
+            StmGuardar.setString(5,txtDireccion.getText());
+            StmGuardar.setInt(6,Integer.parseInt(txtTelefono.getText()));
+            StmGuardar.setString(7,txtCorreo.getText());
+            StmGuardar.setString(8,txtPassword.getText());
+            StmGuardar.setString(9,txtPuesto.getText());
+
+            StmGuardar.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane,"Datos insertados correctamente");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(rootPane,"Error "+e);
+        }
+    }
+
     private void modificar() {
         try {
             PreparedStatement StmModificar;
             String Sql = "update personal set Nombre = ?, ApellidoPaterno = ?, ApellidoMaterno = ?, Direccion = ?, " +
-                    "Telefono = ?, Puesto = ?, Correro = ?, Password = ? where idPersonal = ?";
+                    "Telefono = ?, Puesto = ?, Correo = ?, Password = ? where idPersonal = ?";
             StmModificar = Conex.MiConexion.getConexion().prepareCall(Sql);
             StmModificar.setString(1, txtNombre.getText());
             StmModificar.setString(2, txtApellidoPaterno.getText());
@@ -173,19 +208,6 @@ public class PersonalController extends JDialogMethods implements KeyListener {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Error" + e);
-        }
-    }
-
-    private void Eliminar() {
-        try {
-            PreparedStatement EliminarStm;
-            String SQL = "delete from personal where idPersonal = ?";
-            EliminarStm=Conex.MiConexion.getConexion().prepareCall(SQL);
-            EliminarStm.setInt(1,Integer.parseInt(txtId.getText()));
-            EliminarStm.executeUpdate();
-            JOptionPane.showMessageDialog(rootPane,"Dato eliminado correctamente");
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(rootPane,"Error "+e);
         }
     }
 
@@ -216,37 +238,15 @@ public class PersonalController extends JDialogMethods implements KeyListener {
         }
     }
 
-    private void limpiarCampos() {
-        txtId.setText("");
-        txtNombre.setText("");
-        txtApellidoPaterno.setText("");
-        txtApellidoMaterno.setText("");
-        txtDireccion.setText("");
-        txtTelefono.setText("");
-        txtPuesto.setText("");
-        txtCorreo.setText("");
-        txtPassword.setText("");
-    }
-
-    private void guardar() {
+    private void Eliminar() {
         try {
-            PreparedStatement StmGuardar;
-            String SQL= "insert into personal(idPersonal, Nombre, ApellidoPaterno, ApellidoMaterno, Direccion, Telefono, Puesto, Correro, Password) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            StmGuardar = Conex.MiConexion.getConexion().prepareCall(SQL);
-            StmGuardar.setInt(1,Integer.parseInt(txtId.getText()));
-            StmGuardar.setString(2,txtNombre.getText());
-            StmGuardar.setString(3,txtApellidoPaterno.getText());
-            StmGuardar.setString(4,txtApellidoMaterno.getText());
-            StmGuardar.setString(5,txtDireccion.getText());
-            StmGuardar.setInt(6,Integer.parseInt(txtTelefono.getText()));
-            StmGuardar.setString(7,txtCorreo.getText());
-            StmGuardar.setString(8,txtPassword.getText());
-            StmGuardar.setString(9,txtPuesto.getText());
-
-            StmGuardar.executeUpdate();
-            JOptionPane.showMessageDialog(rootPane,"Datos insertados correctamente");
-
-        } catch (SQLException e) {
+            PreparedStatement EliminarStm;
+            String SQL = "delete from personal where idPersonal = ?";
+            EliminarStm=Conex.MiConexion.getConexion().prepareCall(SQL);
+            EliminarStm.setInt(1,Integer.parseInt(txtId.getText()));
+            EliminarStm.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane,"Dato eliminado correctamente");
+        }catch (Exception e){
             JOptionPane.showMessageDialog(rootPane,"Error "+e);
         }
     }
@@ -256,39 +256,43 @@ public class PersonalController extends JDialogMethods implements KeyListener {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyChar() == KeyEvent.VK_ENTER){
-            txtNombre.requestFocus();
-        }
-        if (e.getKeyChar() == KeyEvent.VK_ENTER){
-            txtApellidoPaterno.requestFocus();
-        }
-        if (e.getKeyChar() == KeyEvent.VK_ENTER){
-            txtApellidoMaterno.requestFocus();
-        }
-        if (e.getKeyChar() == KeyEvent.VK_ENTER){
-            txtCorreo.requestFocus();
-        }
-        if (e.getKeyChar() == KeyEvent.VK_ENTER){
-            txtPassword.requestFocus();
-        }
-        if (e.getKeyChar() == KeyEvent.VK_ENTER){
-            txtDireccion.requestFocus();
-        }
-        if (e.getKeyChar() == KeyEvent.VK_ENTER){
-            txtTelefono.requestFocus();
-        }
-        if (e.getKeyChar() == KeyEvent.VK_ENTER){
-            txtPuesto.requestFocus();
-        }
-        if (e.getKeyChar() == KeyEvent.VK_ENTER){
-            btnGuardar.requestFocus();
-        }
-    }
-
-    private void setTxtIdkeyPressed(java.awt.event.KeyEvent event) {
-        if (event.getKeyChar() == event.VK_ENTER){
-            txtApellidoPaterno.requestFocus();
+    public void keyPressed(KeyEvent e){
+        if (e.getSource() == txtId){
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtNombre.requestFocus();
+            }
+        } else if (e.getSource() == txtNombre) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtApellidoPaterno.requestFocus();
+            }
+        } else if (e.getSource() == txtApellidoPaterno) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtApellidoMaterno.requestFocus();
+            }
+        } else if (e.getSource() == txtApellidoMaterno) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtDireccion.requestFocus();
+            }
+        } else if (e.getSource() == txtDireccion) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtTelefono.requestFocus();
+            }
+        } else if (e.getSource() == txtTelefono) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtPuesto.requestFocus();
+            }
+        } else if (e.getSource() == txtPuesto) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtCorreo.requestFocus();
+            }
+        } else if (e.getSource() == txtCorreo) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtPassword.requestFocus();
+            }
+        } else if (e.getSource() == txtPassword) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                btnGuardar.requestFocus();
+            }
         }
     }
 

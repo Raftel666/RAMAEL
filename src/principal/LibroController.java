@@ -120,7 +120,7 @@ public class LibroController extends JDialogMethods {
         }
     }
 
-        private void guardar() {
+    private void guardar() {
             try {
                 PreparedStatement StmGuardar;
                 String SQL= "insert into libros(ISBN, Titulo, Autor, Editorial, NoPaginas, Genero, tipo) values (?, ?, ?, ?, ?, ?, ?)";
@@ -139,7 +139,7 @@ public class LibroController extends JDialogMethods {
             }
         }
 
-        private void modificar() {
+    private void modificar() {
             try {
                 PreparedStatement StmModificar;
                 String Sql = "update libros set Titulo = ?, Autor = ?, Editorial = ?, NoPaginas = ?, Genero = ?, tipo = ? where ISBN = ?";
@@ -158,7 +158,7 @@ public class LibroController extends JDialogMethods {
             }
         }
 
-        private boolean buscar(boolean mostrar ) {
+    private boolean buscar(boolean mostrar ) {
             try {
                 PreparedStatement buscarStm;
                 String SQL =" select*from libros where ISBN = ?";
@@ -183,7 +183,7 @@ public class LibroController extends JDialogMethods {
             }
         }
 
-        private void Eliminar() {
+    private void Eliminar() {
             try {
                 PreparedStatement EliminarStm;
                 String SQL = "delete from libros where ISBN = ?";
@@ -196,7 +196,7 @@ public class LibroController extends JDialogMethods {
             }
         }
 
-        private void limpiarCampos() {
+    private void limpiarCampos() {
         txtId.setText("");
         txtTitulo.setText("");
         txtAutor.setText("");
@@ -207,12 +207,41 @@ public class LibroController extends JDialogMethods {
         txtId.requestFocus();
     }
 
-        @Override
-        public void keyTyped(KeyEvent e) {
+    @Override
+    public void keyTyped(KeyEvent e) {
         }
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e){
+        if (e.getSource() == txtId){
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtTitulo.requestFocus();
+            }
+        } else if (e.getSource() == txtTitulo) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtAutor.requestFocus();
+            }
+        } else if (e.getSource() == txtAutor) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtEditorial.requestFocus();
+            }
+        } else if (e.getSource() == txtEditorial) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtPaginas.requestFocus();
+            }
+        } else if (e.getSource() == txtPaginas) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtGenero.requestFocus();
+            }
+        } else if (e.getSource() == txtGenero) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtTipo.requestFocus();
+            }
+        } else if (e.getSource() == txtTipo) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                btnGuardar.requestFocus();
+            }
+        }
     }
 
     @Override

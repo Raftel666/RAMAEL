@@ -229,11 +229,47 @@ public class ComicController extends JDialogMethods {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-    }
+    public void keyTyped(KeyEvent e) {}
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e){
+        if (e.getSource() == txtId){
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtTitulo.requestFocus();
+            }
+        } else if (e.getSource() == txtTitulo) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtFecha.requestFocus();
+            }
+        } else if (e.getSource() == txtFecha) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtAutor.requestFocus();
+            }
+        } else if (e.getSource() == txtAutor) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtEditorial.requestFocus();
+            }
+        } else if (e.getSource() == txtEditorial) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtGenero.requestFocus();
+            }
+        } else if (e.getSource() == txtGenero) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtFranquicia.requestFocus();
+            }
+        } else if (e.getSource() == txtFranquicia) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtEjemplar.requestFocus();
+            }
+        } else if (e.getSource() == txtEjemplar) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtTipo.requestFocus();
+            }
+        } else if (e.getSource() == txtTipo) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                btnGuardar.requestFocus();
+            }
+        }
     }
 
     @Override

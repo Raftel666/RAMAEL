@@ -61,6 +61,17 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
         this.setVisible(true);
     }
 
+    private void limpiarCampos() {
+        txtId.setText("");
+        txtNombre.setText("");
+        txtApellidoPaterno.setText("");
+        txtApellidoMaterno.setText("");
+        txtDireccion.setText("");
+        txtTelefono.setText("");
+        txtCorreo.setText("");
+        txtId.requestFocus();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnGuardar) {
@@ -212,16 +223,6 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
         }
     }
 
-    private void limpiarCampos() {
-        txtId.setText("");
-        txtNombre.setText("");
-        txtApellidoPaterno.setText("");
-        txtApellidoMaterno.setText("");
-        txtDireccion.setText("");
-        txtTelefono.setText("");
-        txtCorreo.setText("");
-        txtId.requestFocus();
-    }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -229,6 +230,35 @@ public class UsuarioController extends JDialogMethods implements ActionListener 
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (e.getSource() == txtId){
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtNombre.requestFocus();
+            }
+        } else if (e.getSource() == txtNombre) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtApellidoPaterno.requestFocus();
+            }
+        } else if (e.getSource() == txtApellidoPaterno) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtApellidoMaterno.requestFocus();
+            }
+        } else if (e.getSource() == txtApellidoMaterno) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtCorreo.requestFocus();
+            }
+        } else if (e.getSource() == txtCorreo) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtDireccion.requestFocus();
+            }
+        } else if (e.getSource() == txtDireccion) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                txtTelefono.requestFocus();
+            }
+        } else if (e.getSource() == txtTelefono) {
+            if (e.getKeyChar() == e.VK_ENTER){
+                btnGuardar.requestFocus();
+            }
+        }
     }
 
     @Override
