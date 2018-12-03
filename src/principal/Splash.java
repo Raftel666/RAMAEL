@@ -67,7 +67,7 @@ public class Splash extends JFrame implements MouseListener, MouseMotionListener
 
     private void dormirSplash() {
         try {
-            Thread.sleep(300);
+            Thread.sleep(100);
         } catch (InterruptedException ex){
             JOptionPane.showMessageDialog(rootPane, "Error:"+ex);
         } finally {

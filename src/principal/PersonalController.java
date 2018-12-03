@@ -4,34 +4,38 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PersonalController extends JDialogMethods {
-    JLabel lbId = new JLabel("Id:");
-    JLabel lbNombre = new JLabel("Nombre:");
-    JLabel lbApellidoPaterno = new JLabel("Apellido Paterno:");
-    JLabel lbApellidoMaterno = new JLabel("Apellido Materno:");
-    JLabel lbCorreo = new JLabel("Correo electrónico:");
-    JLabel lbPassword = new JLabel("Password:");
-    JLabel lbDireccion = new JLabel("Dirección:");
-    JLabel lbTelefono = new JLabel("Telefono:");
-    JLabel lbPuesto = new JLabel("Puesto:");
-    JTextField txtId = new JTextField();
-    JTextField txtNombre = new JTextField();
-    JTextField txtApellidoPaterno = new JTextField();
-    JTextField txtApellidoMaterno = new JTextField();
-    JTextField txtCorreo = new JTextField();
-    JTextField txtPassword = new JTextField();
-    JTextField txtDireccion = new JTextField();
-    JTextField txtTelefono = new JTextField();
-    JTextField txtPuesto = new JTextField();
-    JButton btnGuardar = new JButton("Guardar");
-    JButton btnSalir = new JButton("Salir");
-    JButton btnModificar = new JButton("Modificar");
-    JButton btnConsultar = new JButton("Consultar");
-    JButton btnEliminar = new JButton("Eliminar");
+public class PersonalController extends JDialogMethods implements KeyListener {
+    private JLabel lbId = new JLabel("Id:");
+    private JLabel lbNombre = new JLabel("Nombre:");
+    private JLabel lbApellidoPaterno = new JLabel("Apellido Paterno:");
+    private JLabel lbApellidoMaterno = new JLabel("Apellido Materno:");
+    private JLabel lbCorreo = new JLabel("Correo electrónico:");
+    private JLabel lbPassword = new JLabel("Password:");
+    private JLabel lbDireccion = new JLabel("Dirección:");
+    private JLabel lbTelefono = new JLabel("Telefono:");
+    private JLabel lbPuesto = new JLabel("Puesto:");
+
+    private JTextField txtId = new JTextField();
+    private JTextField txtNombre = new JTextField();
+    private JTextField txtApellidoPaterno = new JTextField();
+    private JTextField txtApellidoMaterno = new JTextField();
+    private JTextField txtCorreo = new JTextField();
+    private JTextField txtPassword = new JTextField();
+    private JTextField txtDireccion = new JTextField();
+    private JTextField txtTelefono = new JTextField();
+    private JTextField txtPuesto = new JTextField();
+
+    private JButton btnGuardar = new JButton("Guardar");
+    private JButton btnModificar = new JButton("Modificar");
+    private JButton btnEliminar = new JButton("Eliminar");
+    private JButton btnConsultar = new JButton("Consultar");
+    private JButton btnSalir = new JButton("Salir");
+    private JButton btnLimpiar = new JButton("Limpiar");
 
     public PersonalController(Frame owner, boolean modal) {
         super(owner, modal);
@@ -46,11 +50,13 @@ public class PersonalController extends JDialogMethods {
         addLabel(lbDireccion, 10, 370, 150, 30, this);
         addLabel(lbTelefono, 10, 430, 150, 30, this);
         addLabel(lbPuesto, 10, 490, 150, 30, this);
+
         addButton(btnGuardar, null, 250, 40, 120, 30, this);
-        addButton(btnModificar, null, 250, 100, 120, 30, this);
-        addButton(btnConsultar, null, 250, 160, 120, 30, this);
+        addButton(btnConsultar, null, 250, 100, 120, 30, this);
+        addButton(btnModificar, null, 250, 160, 120, 30, this);
         addButton(btnEliminar, null, 250, 220, 120, 30, this);
-        addButton(btnSalir, null, 250, 280, 120, 30, this);
+        addButton(btnLimpiar, null, 250, 280, 120, 30, this);
+        addButton(btnSalir, null, 250, 340, 120, 30, this);
 
         addTextField(txtId, 10, 40, 200,30, "Id...", this);
         addTextField(txtNombre, 10, 100, 200,30, "Nombre...", this);
@@ -67,6 +73,9 @@ public class PersonalController extends JDialogMethods {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnGuardar) {
+            if (txtId.getText().isEmpty()) {
+                textFieldRed(txtId);
+            }
             if (txtNombre.getText().isEmpty()) {
                 textFieldRed(txtNombre);
             }
@@ -78,6 +87,9 @@ public class PersonalController extends JDialogMethods {
             }
             if (txtCorreo.getText().isEmpty()) {
                 textFieldRed(txtCorreo);
+            }
+            if (txtPassword.getText().isEmpty()) {
+                textFieldRed(txtPassword);
             }
             if (txtDireccion.getText().isEmpty()) {
                 textFieldRed(txtDireccion);
@@ -91,6 +103,7 @@ public class PersonalController extends JDialogMethods {
                 guardar();
                 limpiarCampos();
             }
+
         } else if(e.getSource()==btnConsultar){
             if (txtId.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "Campo id no debe estar vacio");
@@ -131,6 +144,9 @@ public class PersonalController extends JDialogMethods {
                 }
             }
         }
+        else if (e.getSource() == btnLimpiar) {
+            limpiarCampos();
+        }
         if (e.getSource() == btnSalir){
             this.dispose();
         }
@@ -151,7 +167,6 @@ public class PersonalController extends JDialogMethods {
             StmModificar.setString(7, txtCorreo.getText());
             StmModificar.setString(8, txtPassword.getText());
             StmModificar.setString(9, txtId.getText());
-
 
             StmModificar.executeUpdate();
             JOptionPane.showMessageDialog(rootPane, "Datos actualizados correctamente");
@@ -242,6 +257,39 @@ public class PersonalController extends JDialogMethods {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (e.getKeyChar() == KeyEvent.VK_ENTER){
+            txtNombre.requestFocus();
+        }
+        if (e.getKeyChar() == KeyEvent.VK_ENTER){
+            txtApellidoPaterno.requestFocus();
+        }
+        if (e.getKeyChar() == KeyEvent.VK_ENTER){
+            txtApellidoMaterno.requestFocus();
+        }
+        if (e.getKeyChar() == KeyEvent.VK_ENTER){
+            txtCorreo.requestFocus();
+        }
+        if (e.getKeyChar() == KeyEvent.VK_ENTER){
+            txtPassword.requestFocus();
+        }
+        if (e.getKeyChar() == KeyEvent.VK_ENTER){
+            txtDireccion.requestFocus();
+        }
+        if (e.getKeyChar() == KeyEvent.VK_ENTER){
+            txtTelefono.requestFocus();
+        }
+        if (e.getKeyChar() == KeyEvent.VK_ENTER){
+            txtPuesto.requestFocus();
+        }
+        if (e.getKeyChar() == KeyEvent.VK_ENTER){
+            btnGuardar.requestFocus();
+        }
+    }
+
+    private void setTxtIdkeyPressed(java.awt.event.KeyEvent event) {
+        if (event.getKeyChar() == event.VK_ENTER){
+            txtApellidoPaterno.requestFocus();
+        }
     }
 
     @Override
@@ -270,5 +318,6 @@ public class PersonalController extends JDialogMethods {
         if (!txtPassword.getText().isEmpty()){
             textFieldWhite(txtPassword);
         }
+
     }
 }

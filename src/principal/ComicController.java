@@ -134,11 +134,12 @@ public class ComicController extends JDialogMethods {
     private void guardar() {
         try {
             PreparedStatement StmGuardar;
-            String SQL= "insert into comics(idComics, Titulo, Fecha, Autor, Editorial, Genero, Franquicia, NoEjemplares, Tipo) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String SQL= "insert into comics(idComics, Titulo, Fecha, Autor, Editorial, Genero, Franquicia, " +
+                    "NoEjemplares, Tipo) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             StmGuardar = Conex.MiConexion.getConexion().prepareCall(SQL);
             StmGuardar.setInt(1,Integer.parseInt(txtId.getText()));
             StmGuardar.setString(2,txtTitulo.getText());
-            //StmGuardar.setDate(3, );
+            StmGuardar.setDate(3, java.sql.Date.valueOf(txtFecha.getText()));
             StmGuardar.setString(4,txtAutor.getText());
             StmGuardar.setString(5,txtEditorial.getText());
             StmGuardar.setString(6,txtGenero.getText());
@@ -155,10 +156,11 @@ public class ComicController extends JDialogMethods {
     private void modificar() {
         try {
             PreparedStatement StmModificar;
-            String Sql = "update comics set Titulo = ?, Fecha = ?, Autor = ?, Editorial = ?, Genero = ?, Franquicia = ?, NoEjemplares = ?, Tipo = ? where idComics = ?";
+            String Sql = "update comics set Titulo = ?, Fecha = ?, Autor = ?, Editorial = ?, Genero = ?, Franquicia = ?, " +
+                    "NoEjemplares = ?, Tipo = ? where idComics = ?";
             StmModificar = Conex.MiConexion.getConexion().prepareCall(Sql);
             StmModificar.setString(1, txtTitulo.getText());
-            //StmModificar.setTimestamp(2,);
+            StmModificar.setDate(2, java.sql.Date.valueOf(txtFecha.getText()));
             StmModificar.setString(3, txtAutor.getText());
             StmModificar.setString(4, txtEditorial.getText());
             StmModificar.setString(5, txtGenero.getText());
